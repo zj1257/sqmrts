@@ -7,6 +7,8 @@ import base64
 import math
 import json
 import requests
+import hashlib
+from Crypto.Cipher import AES
 
 class Spider(Spider):
     def getName(self):
@@ -185,6 +187,13 @@ class Spider(Spider):
                     'list': videos
                 }
         return result
+    def parseCBC(self, enc, key, iv):
+        keyBytes = key.encode("utf-8")
+        ivBytes = iv.encode("utf-8")
+        cipher = AES.new(keyBytes, AES.MODE_CBC, ivBytes)
+        msg = cipher.decrypt(enc)
+        paddingLen = msg[len(msg) - 1]
+        return msg[0:-paddingLen]
 
     def playerContent(self,flag,id,vipFlags):
         header = {
@@ -199,8 +208,29 @@ class Spider(Spider):
         if info['url'].startswith('http'):
             purl = info['url']
         else:
-            parse = 1
-            purl = url
+            url = 'https://cms.ikanys.tv/ikanbfqmui/nicaibudaowozaina.php?url={}'.format(info['url'])
+            r = requests.get(url, headers=header, verify=False)
+            now_infos=[]
+            now_infos.append(self.regStr(r.text, r'now_([0-9]*?)\"'))
+            now_infos.append(self.regStr(r.text, r'now_([0-9A-Za-z]*[A-Za-z]+[0-9A-Za-z]*?)\"'))
+            content_str = self.regStr(r.text,r'\"url\": \"(.*?)\"')
+            posList = list(now_infos[0])
+            secretsDict = {}
+            for pos in range(len(posList)):
+                secretsDict[posList[pos]] = now_infos[1][pos]
+            posList.sort()
+            secrets = ""
+            for pos in posList:
+                secrets += secretsDict[pos]
+            secrets_data = '{}ikanysbfq66bielaizhanbian'.format(secrets).encode()
+            secrets_md5 = hashlib.md5(secrets_data).hexdigest()
+            iv = secrets_md5[:16]
+            key = secrets_md5[-16:]
+            purl = self.parseCBC(base64.b64decode(content_str), key, iv).decode()
+        # 直接调用解析
+        # else:
+        #     parse = 1
+        #     purl = url
         result["parse"] = parse
         result["playUrl"] = ''
         result["url"] = purl
