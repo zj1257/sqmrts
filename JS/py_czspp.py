@@ -37,9 +37,9 @@ class Spider(Spider):  # 元类 默认的元类 type
         return result
 
     def homeVideoContent(self):
-        # https://www.czzy03.com
+        # https://www.czzy.art
         # https://www.czzzu.com
-        rsp = self.fetch("https://www.czzy03.com")
+        rsp = self.fetch("https://www.czzy.art")
         root = self.html(self.cleanText(rsp.text))
         aList = root.xpath("//div[@class='mi_btcon']//ul/li")
         videos = []
@@ -66,7 +66,7 @@ class Spider(Spider):  # 元类 默认的元类 type
 
     def categoryContent(self, tid, pg, filter, extend):
         result = {}
-        url = 'https://www.czzy03.com/{0}/page/{1}'.format(tid, pg)
+        url = 'https://www.czzy.art/{0}/page/{1}'.format(tid, pg)
         rsp = self.fetch(url)
         root = self.html(self.cleanText(rsp.text))
         aList = root.xpath("//div[contains(@class,'mi_cont')]//ul/li")
@@ -97,7 +97,7 @@ class Spider(Spider):  # 元类 默认的元类 type
 
     def detailContent(self, array):
         tid = array[0]
-        url = 'https://www.czzy03.com/movie/{0}.html'.format(tid)
+        url = 'https://www.czzy.art/movie/{0}.html'.format(tid)
         rsp = self.fetch(url)
         root = self.html(self.cleanText(rsp.text))
         node = root.xpath("//div[@class='dyxingq']")[0]
@@ -174,7 +174,7 @@ class Spider(Spider):  # 元类 默认的元类 type
         return result
 
     def searchContent(self, key, quick):
-        url = 'https://www.czzy03.com/?s={0}'.format(key)
+        url = 'https://www.czzy.art/?s={0}'.format(key)
         rsp = self.fetch(url,headers={"cookie": "esc_search_captcha=1"})
         root = self.html(self.cleanText(rsp.text))
         # yanzheng = root.xpath("//div/form/text()")[0]
@@ -221,7 +221,7 @@ class Spider(Spider):  # 元类 默认的元类 type
         return msg[0:-paddingLen]
 
     def playerContent(self, flag, id, vipFlags):
-        url = 'https://www.czzy03.com/v_play/{0}.html'.format(id)
+        url = 'https://www.czzy.art/v_play/{0}.html'.format(id)
         pat = '\\"([^\\"]+)\\";var [\\d\\w]+=function dncry.*md5.enc.Utf8.parse\\(\\"([\\d\\w]+)\\".*md5.enc.Utf8.parse\\(([\\d]+)\\)'
         rsp = self.fetch(url)
         html = rsp.text
