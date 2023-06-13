@@ -53,7 +53,19 @@
 		"quickSearch": 0,
 		"filterable": 1,
 		"ext": "./py_cyys.py"
-	}],
+	},{
+	    "key": "bilibili",
+		"name": "bilibili",
+		"type": 3,
+		"api": "py_bilibili",
+		"searchable": 0,
+		"quickSearch": 0,
+		"filterable": 1,
+		"ext": "./py_bilivdmd_pg.py"
+	}
+	
+	
+	],
 	"parses": [{
 		"name": "默认选项",
 		"type": 3,
