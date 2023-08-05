@@ -26,10 +26,9 @@ class Spider(Spider):  # 元类 默认的元类 type
         if len(self.cookies) <= 0:
             self.getCookie()
         cateManual = {
-            "小小世界": "昆虫小世界",
-            "演唱会": "演唱会",
-            "动物世界": "动物世界",
-            "相声小品": "相声小品"
+            "奥特曼": "pgc奥特曼+中配",
+            "注安实务": "注安化工实务",
+            "注安管理": "注安管理"
         }
         classes = []
         for k in cateManual:
@@ -42,44 +41,18 @@ class Spider(Spider):  # 元类 默认的元类 type
             result['filters'] = self.config['filter']
         return result
 
+
     def homeVideoContent(self):
-        key = '奥特曼+中配'
-        url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=media_bangumi&keyword={0}'.format(key)  # 番剧搜索
-        if len(self.cookies) <= 0:
-            self.getCookie()
-        rsp = self.fetch(url, cookies=self.cookies)
-        content = rsp.text
-        jo = json.loads(content)
-        rs = jo['data']
-        if rs['numResults'] == 0:
-            url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=media_ft&keyword={0}'.format(key)  # 影视搜索
-            rspRetry = self.fetch(url, cookies=self.cookies)
-            content = rspRetry.text
-        jo = json.loads(content)
-        videos = []
-        vodList = jo['data']['result']
-        for vod in vodList:
-            aid = str(vod['season_id']).strip()
-            title = vod['title'].strip().replace("<em class=\"keyword\">", "").replace("</em>", "")
-            img = vod['eps'][0]['cover'].strip()
-            remark = vod['index_show']
-            videos.append({
-                "vod_id": 'pgc'+aid,
-                "vod_name": title,
-                "vod_pic": img,
-                "vod_remarks": remark
-            })
-        result = {
-            'list': videos
-        }
-        return result
+        tid = '昆虫小世界'
+        return self.categoryContent(tid, 1, False, {})
+
 
     cookies = ''
     login = False
     def getCookie(self):
         try:
-            #cookies_str = self.fetch("https://pan.shangui.cc/f/wQeATg/cookies.txt").text
-            cookies_str = 'buvid3=8B57D3BA-607A-1E85-018A-E8C430023CED42659infoc; b_lsid=BEB8EE7F_18742FF8C2E; bsource=search_baidu; _uuid=DE810E367-B52C-AF6E-A612-EDF4C31567F358591infoc; b_nut=100; buvid_fp=711a632b5c876fa8bbcf668c1efba551; SESSDATA=7624af93%2C1696008331%2C862c8%2A42; bili_jct=141a474ef3ce8cf2fedf384e68f6625d; DedeUserID=3493271303096985; DedeUserID__ckMd5=212a836c164605b7; sid=5h4ruv6o; buvid4=978E9208-13DA-F87A-3DC0-0B8EDF46E80434329-123040301-dWliG5BMrUb70r3g583u7w%3D%3D'
+            cookies_str = self.fetch("https://pan.shangui.cc/f/wQeATg/cookies.txt").text
+            # cookies_str = ""
             cookies_dic = dict([co.strip().split('=') for co in cookies_str.split(';')])
             rsp = session()
             cookies_jar = utils.cookiejar_from_dict(cookies_dic)
@@ -100,29 +73,57 @@ class Spider(Spider):  # 元类 默认的元类 type
 
     def categoryContent(self, tid, pg, filter, extend):
         result = {}
-        url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={0}&page={1}'.format(tid, pg)
-        if len(self.cookies) <= 0:
-            self.getCookie()
-        rsp = self.fetch(url, cookies=self.cookies)
-        content = rsp.text
-        jo = json.loads(content)
-        videos = []
-        vodList = jo['data']['result']
-        for vod in vodList:
-            aid = str(vod['aid']).strip()
-            title = vod['title'].replace("<em class=\"keyword\">", "").replace("</em>", "").replace("&quot;", '"')
-            img = 'https:' + vod['pic'].strip()
-            remark = str(vod['duration']).strip()
-            videos.append({
-                "vod_id": aid,
-                "vod_name": title,
-                "vod_pic": img,
-                "vod_remarks": remark
-            })
+        if tid.startswith("pgc"):
+            tid = tid[3:]
+            url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=media_bangumi&keyword={0}&page={1}'.format(tid, pg)  # 番剧搜索
+            if len(self.cookies) <= 0:
+                self.getCookie()
+            rsp = self.fetch(url, cookies=self.cookies)
+            content = rsp.text
+            jo = json.loads(content)
+            rs = jo['data']
+            if rs['numResults'] == 0:
+                url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=media_ft&keyword={0}&page={1}'.format(tid, pg)  # 影视搜索
+                rspRetry = self.fetch(url, cookies=self.cookies)
+                content = rspRetry.text
+            jo = json.loads(content)
+            videos = []
+            vodList = jo['data']['result']
+            for vod in vodList:
+                aid = str(vod['season_id']).strip()
+                title = vod['title'].strip().replace("<em class=\"keyword\">", "").replace("</em>", "")
+                img = vod['eps'][0]['cover'].strip()
+                remark = vod['index_show']
+                videos.append({
+                    "vod_id": 'pgc'+aid,
+                    "vod_name": title,
+                    "vod_pic": img,
+                    "vod_remarks": remark
+                })
+        else:
+            url = 'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={0}&page={1}'.format(tid, pg)
+            if len(self.cookies) <= 0:
+                self.getCookie()
+            rsp = self.fetch(url, cookies=self.cookies)
+            content = rsp.text
+            jo = json.loads(content)
+            videos = []
+            vodList = jo['data']['result']
+            for vod in vodList:
+                aid = str(vod['aid']).strip()
+                title = vod['title'].replace("<em class=\"keyword\">", "").replace("</em>", "").replace("&quot;", '"')
+                img = 'https:' + vod['pic'].strip()
+                remark = str(vod['duration']).strip()
+                videos.append({
+                    "vod_id": aid,
+                    "vod_name": title,
+                    "vod_pic": img,
+                    "vod_remarks": remark
+                })
         result['list'] = videos
-        result['page'] = pg
-        result['pagecount'] = 9999
-        result['limit'] = 90
+        result['page'] = jo['data']['page']
+        result['pagecount'] = jo['data']['numPages']
+        result['limit'] = 5
         result['total'] = 999999
         return result
 
