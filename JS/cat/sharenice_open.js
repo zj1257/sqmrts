@@ -101,7 +101,7 @@ async function detail(id) {
         vod_remarks: '',
     };
     let playlist = ['观看视频' + '$' + id];
-    vod.vod_play_from = '道长在线';
+    vod.vod_play_from = 'open在线';
     vod.vod_play_url = playlist.join('#');
     return JSON.stringify({
         list: [vod],
