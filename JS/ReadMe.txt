@@ -1,0 +1,1 @@
+http://ghproxy.net/https://raw.githubusercontent.com/zj1257/sqmrts/json/JS/
