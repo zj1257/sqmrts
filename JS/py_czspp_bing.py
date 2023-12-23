@@ -11,7 +11,15 @@ class Spider(Spider):  # 元类 默认的元类 type
         return "厂长资源"
 
     def init(self, extend=""):
-        print("============{0}============".format(extend))
+        # https://czzy.art
+        # https://www.czzzu.com
+        # https://www.cz01.fun
+        # https://www.czzy33.com
+        if extend=="":
+            self.hostname = "https://www.czzy33.com"
+        else:
+            self.hostname = extend
+        #print("============{0}============".format(extend))
         pass
 
     def homeContent(self, filter):
@@ -36,10 +44,7 @@ class Spider(Spider):  # 元类 默认的元类 type
         result['class'] = classes
         return result
         
-    # https://czzy.art
-    # https://www.czzzu.com
-    # https://www.cz01.fun
-    hostname = 'https://www.czzy33.com'
+
     
     def homeVideoContent(self):
         rsp = self.fetch(self.hostname + "/reyingzhong")
@@ -178,8 +183,9 @@ class Spider(Spider):  # 元类 默认的元类 type
         return result
 
     def searchContent(self, key, quick):
-        url = self.hostname + '/?s={0}'.format(key)
-        rsp = self.fetch(url,headers={"cookie": "esc_search_captcha=1"})
+        url = 'https://cn.bing.com/search?q={0}+site%3Aczzy88.com'.format(key)
+        rsp = self.fetch(url,headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"})
+        # print(rsp.text)
         root = self.html(self.cleanText(rsp.text))
         # yanzheng = root.xpath("//div/form/text()")[0]
         # yanzheng = yanzheng.replace(' ', '').replace('=', '')
@@ -187,18 +193,20 @@ class Spider(Spider):  # 元类 默认的元类 type
         # yanzheng = int(yanzheng[0])+int(yanzheng[1])
         # print(str(yanzheng))
         # root = self.html(self.cleanText(rsp.text))
-        vodList = root.xpath("//div[contains(@class,'mi_ne_kd')]/ul/li/a")
+        vodList = root.xpath("//ol[@id='b_results']/li[@class='b_algo']")
         videos = []
         for vod in vodList:
-            name = vod.xpath('./img/@alt')[0]
-            pic = vod.xpath('./img/@data-original')[0]
-            href = vod.xpath('./@href')[0]
+            # name = vod.xpath('./h2/a/text()')[0]
+            name = "".join(vod.xpath('./h2/a//text()'))
+            name = self.regStr(name, '《(\\S+)》')
+            if len(name) ==0:
+                continue
+            print(name)
+            pic = ""
+            href = vod.xpath('./h2/a/@href')[0]
             tid = self.regStr(href, 'movie/(\\S+).html')
-            res = vod.xpath('./div[@class="jidi"]/span/text()')
-            if len(res) == 0:
-                remark = '全1集'
-            else:
-                remark = vod.xpath('./div[@class="jidi"]/span/text()')[0]
+            # remark = vod.xpath('./div[@class="jidi"]/span/text()')[0]
+            remark = ""
             videos.append({
                 "vod_id": tid,
                 "vod_name": name,
