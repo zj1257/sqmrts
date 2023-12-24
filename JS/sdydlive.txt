@@ -89,18 +89,12 @@ CCTV世界地理,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226947/i
 CCTV电视指南,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226987/index.m3u8
 CCTV文化精品,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226981/index.m3u8
 CCTV高尔夫网球,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226978/index.m3u8
-CHC动作电影,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226465/index.m3u8
-CHC家庭影院,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226462/index.m3u8
-CHC高清电影,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226463/index.m3u8
 CNC英文,http://39.135.138.58:18890/PLTV/88888888/224/3221225693/index.m3u8
 CNC中文,http://39.135.138.58:18890/PLTV/88888888/224/3221225694/index.m3u8
 CNC英文,http://39.135.138.59:18890/PLTV/88888910/224/3221225693/index.m3u8#http://39.134.115.163:8080/PLTV/88888910/224/3221225693/index.m3u8
 CNC中文,http://39.134.115.163:8080/PLTV/88888910/224/3221225694/index.m3u8#http://39.135.138.59:18890/PLTV/88888910/224/3221225694/index.m3u8
 CGTN纪录,http://39.135.138.58:18890/PLTV/88888888/224/3221225645/index.m3u8
 
-CHC高清电影,http://bytedance.live.cqccn.com/__cl/cg:live/__c/chcgqdyHD/__op/default/__f//index.m3u8
-CHC动作电影,http://bytedance.live.cqccn.com/__cl/cg:live/__c/chcdzdyHD/__op/default/__f//index.m3u8
-CHC家庭影院,http://bytedance.live.cqccn.com/__cl/cg:live/__c/chcjtyyHD/__op/default/__f//index.m3u8
 CCTV风云剧场,http://bytedance.live.cqccn.com/__cl/cg:live/__c/fyjcHD/__op/default/__f//index.m3u8
 CCTV风云剧场,http://bytedance.live.cqccn.com/__cl/cg:live/__c/shandongHD/__op/default/__f//index.m3u8
 CCTV风云音乐,http://bytedance.live.cqccn.com/__cl/cg:live/__c/fyyyHD/__op/default/__f//index.m3u8
@@ -497,8 +491,10 @@ LY1,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00001104/index.m3u8
 熊大过年,https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/7ae265653fe149069c3b53e31caaf060/1200.m3u8
 狮子王國,https://newcntv.qcloudcdn.com/asp/hls/850/0303000a/3/default/c2e7e767f3144bed959ef20b8b961fe5/850.m3u8
 
+游戏竞技,#genre#
+JJ斗地主,https://xy58x218x65x34xy.mcdn.bilivideo.cn:486/live-bvc/208641/live_315571702_79885316_minihevc/index.m3u8
+
 港澳频道,#genre#
-凤凰电影,http://218.202.220.2:5000/nn_live.ts?id=NEWSASIA
 香港卫视,http://zhibo.hkstv.tv/livestream/mutfysrq/playlist.m3u8 
 香港卫视,http://zhibo.hkstv.tv/livestream/mutfysrq/playlist.m3u8?wsSession=3c732f93c14e1bc0c07641df-156388849014752&wsIPSercert=8de23d0849e78e3b16ec92a809235421&wsMonitor=0 
 有线新闻,http://61.10.2.141/live_freedirect/freehd209_h.live/playlist.m3u
@@ -553,6 +549,12 @@ GoodTV 爱旅行台,https://live-350k.streamingfast.net/hls-live/goodtv/_definst
 CHC动作电影,http://39.134.19.252:6610/yinhe/2/ch00000090990000002055/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
 CHC高清电影,http://39.134.19.252:6610/yinhe/2/ch00000090990000002065/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
 CHC家庭影院,http://39.134.19.252:6610/yinhe/2/ch00000090990000002085/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+CHC动作电影,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226465/index.m3u8
+CHC家庭影院,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226462/index.m3u8
+CHC高清电影,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226463/index.m3u8
+CHC高清电影,http://bytedance.live.cqccn.com/__cl/cg:live/__c/chcgqdyHD/__op/default/__f//index.m3u8
+CHC动作电影,http://bytedance.live.cqccn.com/__cl/cg:live/__c/chcdzdyHD/__op/default/__f//index.m3u8
+CHC家庭影院,http://bytedance.live.cqccn.com/__cl/cg:live/__c/chcjtyyHD/__op/default/__f//index.m3u8
 
 景区直播,#genre#
 全国风景总览,https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8?contentid=2820180516001
@@ -678,6 +680,19 @@ CHC家庭影院,http://39.134.19.252:6610/yinhe/2/ch00000090990000002085/index.m
 独家直播,https://bp-caster.bestv.com.cn/936/3/video.m3u8
 
 NewTV,#genre#
+求索动物,http://39.134.66.5/PLTV/88888888/224/3221225730/index.m3u8
+求索纪录,http://39.134.66.5/PLTV/88888888/224/3221225713/index.m3u8
+求索生活,http://39.134.66.5/PLTV/88888888/224/3221225715/index.m3u8
+求索科学,http://39.134.66.5/PLTV/88888888/224/3221225728/index.m3u8
+爱自然,https://d18dyiwu97wm6q.cloudfront.net/playlist2160p.m3u8
+中国国际教育1,http://play.cec-tv.com.cn/channel/cec-tv1.m3u8
+中国国际教育2,http://play.cec-tv.com.cn/channel/cec-tv2.m3u8
+中国国际教育3,http://play.cec-tv.com.cn/channel/cec-tv3.m3u8
+中国国际教育4,http://play.cec-tv.com.cn/channel/cec-tv4.m3u8
+中国气象,http://hls.weathertv.cn/tslslive/qCFIfHB/hls/live_sd.m3u8
+百视TV,http://bp-caster.bestv.com.cn/515/1/video.m3u8
+百视电影,http://bp-caster.bestv.com.cn/532/1/video.m3u8
+百视都市,http://bp-caster.bestv.com.cn/494/1/video.m3u8
 New古装剧场,http://39.134.66.66/PLTV/88888888/224/3221225524/index.m3u8
 New金牌综艺,http://39.134.66.66/PLTV/88888888/224/3221225525/index.m3u8
 New爱情喜剧,http://39.134.66.66/PLTV/88888888/224/3221225533/index.m3u8
@@ -696,19 +711,6 @@ New超级电视剧,http://39.134.66.66/PLTV/88888888/224/3221225637/index.m3u8
 New超级综艺,http://39.134.66.66/PLTV/88888888/224/3221225642/index.m3u8
 New超级电影,http://39.134.66.66/PLTV/88888888/224/3221225644/index.m3u8
 New炫舞未来,http://39.134.66.66/PLTV/88888888/224/3221225646/index.m3u8
-求索动物,http://39.134.66.5/PLTV/88888888/224/3221225730/index.m3u8
-求索纪录,http://39.134.66.5/PLTV/88888888/224/3221225713/index.m3u8
-求索生活,http://39.134.66.5/PLTV/88888888/224/3221225715/index.m3u8
-求索科学,http://39.134.66.5/PLTV/88888888/224/3221225728/index.m3u8
-爱自然,https://d18dyiwu97wm6q.cloudfront.net/playlist2160p.m3u8
-中国国际教育1,http://play.cec-tv.com.cn/channel/cec-tv1.m3u8
-中国国际教育2,http://play.cec-tv.com.cn/channel/cec-tv2.m3u8
-中国国际教育3,http://play.cec-tv.com.cn/channel/cec-tv3.m3u8
-中国国际教育4,http://play.cec-tv.com.cn/channel/cec-tv4.m3u8
-中国气象,http://hls.weathertv.cn/tslslive/qCFIfHB/hls/live_sd.m3u8
-百视TV,http://bp-caster.bestv.com.cn/515/1/video.m3u8
-百视电影,http://bp-caster.bestv.com.cn/532/1/video.m3u8
-百视都市,http://bp-caster.bestv.com.cn/494/1/video.m3u8
 
 电视剧轮播,#genre#
 射雕英雄传,https://live.metshop.top/yy/40959929
