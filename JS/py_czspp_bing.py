@@ -16,7 +16,7 @@ class Spider(Spider):  # 元类 默认的元类 type
         # https://www.cz01.fun
         # https://www.czzy33.com
         if extend=="":
-            self.hostname = "https://www.czzy33.com"
+            self.hostname = "https://www.czzy77.com"
         else:
             self.hostname = extend
         #print("============{0}============".format(extend))
