@@ -228,6 +228,8 @@ CCTV世界地理,http://42.176.185.28:9901/tsfile/live/1037_1.m3u8
 厦门卫视,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00000075/index.m3u8
 
 其它频道,#genre#
+凤凰卫视中文,http://dns.yiandrive.com:15907/phenix/fhzw
+凤凰资讯,http://dns.yiandrive.com:15907/phenix/fhzw
 中国交通,http://ucdn-zte.sd.chinamobile.com:8089/shandong_cabletv.live.zte.com////CHANNEL00000073/index.m3u8
 山东齐鲁,http://ucdn-zte.sd.chinamobile.com:8089/shandong_cabletv.live.zte.com////CHANNEL00000313/index.m3u8
 山东体育,http://ucdn-zte.sd.chinamobile.com:8089/shandong_cabletv.live.zte.com////CHANNEL00000315/index.m3u8
@@ -445,29 +447,8 @@ LY1,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00001104/index.m3u8
 嘉佳卡通,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00000074/index.m3u8
 优漫卡通,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00000049/index.m3u8
 金鹰卡通,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00000047/index.m3u8
-
-哈哈炫动,http://39.135.138.59:18890/PLTV/88888910/224/3221225720/index.m3u8
-哈哈炫动,http://223.110.245.163/ott.js.chinamobile.com/PLTV/3/224/3221226388/index.m3u8
-金鹰卡通,http://183.207.249.5:80/PLTV/4/224/3221226303/index.m3u8?
-金鹰卡通,http://iptv.tvfix.org/hls/jykttv.m3u8
-卡酷少儿,http://hsplay-360.v.btime.com/live_btime/btv_sn_20170706_s10/index.m3u8
-卡酷少儿,http://ott.js.chinamobile.com/PLTV/4/224/3221226305/index.m3u8
-卡酷少儿,http://183.207.248.71/gitv/live1/G_KAKU/G_KAKU
-卡酷少儿,http://otttv.bj.chinamobile.com/TVOD/88888888/224/3221226558/1.m3u8
-金鹰卡通,http://39.134.115.163:8080/PLTV/88888910/224/3221225721/index.m3u8
-嘉佳卡通,http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221226193/index.m3u8
-优漫卡通,http://183.207.249.15:80/PLTV/4/224/3221225933/index.m3u8?
-动漫秀场,http://140.207.241.2:8080/live/program/live/dmxchd/4000000/mnf.m3u8
-哈哈炫动,http://iptv.tvfix.org/hls/hhxdhd.m3u8
-南京少儿,http://live.nbs.cn/channels/njtv/sepd/m3u8:500k/live.m3u8
-浙江少儿,http://hw-m-l.cztv.com/channels/lantian/channel08/1080p.m3u8?k=1a7559a51eeb880b021619a07f463ac4&t=1577153787
 福州少儿,http://live.zohi.tv/video/s10001-sepd-4/index.m3u8
-深圳少儿,http://ye23.win/iptv/sztv.php?id=7
 福建少儿,rtsp://183.252.166.199/PLTV/88888888/224/3221226120/10000100000000060000000002358082_0.smil
-动画乐园,http://211.94.219.178:18080/PLTV/68/224/3221226406/index.m3u8
-黑莓电竞,http://39.134.66.66/PLTV/88888888/224/3221225559/index.m3u8
-哈哈炫动,http://39.135.138.59:18890/PLTV/88888910/224/3221225720/index.m3u8
-
 倒霉特熊,https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/87f87ba569c147e3805f80e4844d2de9/1200.m3u8
 雲朵妈妈,https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/d8ad434c6b08421a927557a4d98da65c/1200.m3u8
 反转星球,https://newcntv.qcloudcdn.com/asp/hls/1200/0303000a/3/default/3ccdecc7d6e341c1920ad4eac5d82f38/1200.m3u8
@@ -475,23 +456,14 @@ LY1,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00001104/index.m3u8
 狮子王國,https://newcntv.qcloudcdn.com/asp/hls/850/0303000a/3/default/c2e7e767f3144bed959ef20b8b961fe5/850.m3u8
 
 
-游戏竞技,#genre#
+父母爱看,#genre#
 JJ斗地主,http://tc-tct.douyucdn2.cn/dyliveflv1a/488743rAHScWyyII_2000.flv?wsAuth=fd695c444eeee99cc6122ed396c805ba&token=cpn-androidmpro-0-488743-df8b1830ef2e6ce156759645768df95bf77749da61fcc901&logo=0&expire=0&did=d010b07dcb997ada9934081c873542f0&origin=tct&vhost=play2
 JJ斗地主,http://dns.yiandrive.com:15907/bilibili/22021983
 http://dns.yiandrive.com:15907/huya/14079954
 JJ斗地主,http://dns.yiandrive.com:15907/douyu/488743
 JJ斗地主,http://tc-tct.douyucdn2.cn/dyliveflv1a/488743rAHScWyyII_2000.flv?wsAuth=af68f33dc536a0fb76a514b2dcce8f6b&token=cpn-androidmpro-0-488743-df8b1830ef2e6ce1e55031a221b1d3b7dfd1c7e0d6d57314&logo=0&expire=0&did=d010b07dcb997ada9934081c873542f0&origin=tct&vhost=play2
-
-港澳频道,#genre#
-凤凰卫视中文,http://dns.yiandrive.com:15907/phenix/fhzw
-凤凰资讯,http://dns.yiandrive.com:15907/phenix/fhzw
-
-小品,#genre#
 宋小宝小品,http://dns.yiandrive.com:15907/douyu/9817729
 赵本山小品,http://dns.yiandrive.com:15907/douyu/9817716
 贾玲经典小品,http://dns.yiandrive.com:15907/douyu/10419541
-爱笑会议室,http://dns.yiandrive.com:15907/douyu/9375430
-
-电视剧集,#genre#
 父母爱情,http://dns.yiandrive.com:15907/huya/11602071
 
