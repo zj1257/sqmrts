@@ -1,0 +1,42 @@
+{
+"spider": "https://gitee.com/if00/python/raw/master/jpg/quark.jpg;md5;627eba86a6654b6495f70b68e5e210e4",
+"wallpaper": "http://www.kf666888.cn/api/tvbox/img", 
+"sites": [{"key": "QuarkYunPan", "name": "📁安安的夸克", "type": 3, "api": "csp_PanQuark", "searchable": 0, "filterable": 0, "changeable": 0, "style": {"type": "list", "ratio": 1.433}, "ext": "[{'name':'安安专属','folders':[{'shareId':'','folder':'65b3da4439d04e29b467dd507cfc01f5'}]},{'name':'幼儿教育','folders':[{'shareId':'a08f66152533','folder':'0'}]}]"},
+{
+    "key": "lives",
+    "name": "lives",
+    "type": 3,
+    "api": "./plugin/html/LIVES.py",
+    "searchable": 1,
+    "quickSearch": 1,
+    "filterable": 1,
+    "ext": ''
+    },
+{
+    "key": "myQuark",
+    "name": "我的夸克",
+    "type": 3,
+    "api": "./plugin/anan.py",
+    "searchable": 1,
+    "quickSearch": 1,
+    "filterable": 1,
+    "ext": {"cookie":"b-user-id=2fd27d35-d390-8183-fd19-3a4790010e93; isg=BE5OHXRipTijoRGWCBC735OmnyQQzxLJaWu-s3iX_dEM2-w14Fv02SzZEwe3Qwrh; _UP_A4A_11_=wb9c91b81e7a4972bc0b151548c43fa3; _qk_bx_ck_v1=eyJkZXZpY2VJZCI6ImVDeSNBQU9XWHU3blZPQm9lc3JKcUJqS2tUbHg3OEM0ZVdLMmpMekp3OWpFRGVsTVBYUmRCQ20rWk83QnkwTlN2TFBOVjVjPSIsImRldmljZUZpbmdlcnByaW50IjoiNzhhMjg4Y2RlNDcyODk3ZGZlOTI1NTBlNGY2MTY3Y2YifQ==; tfstk=gcbrOHseFzUz5UbzKIYEbr-gIaYJ-U2s8w9Bt6fHNLvu2gs2-16eOU13eMW2yZsSRLwJ86X68Rw_5P1RwFL3CRG5I8vp7BgoZvghiUdQLem__P1RwjcrK5s05Xk5NkXHK9xkmEA6n4clKBv0gBAIED0lKsV2HBnn-QvnomAetpYH-9f0gBpDKjFlZ60213VIpoLiZ-8J4dfk3V5AuQqyQPpm-obDasJGZm0n-ZRy4ZXAja_vVMf9Xa1a8qL5_iYDTwFiYp-NxaTcr-4MDHjFKIIYLDJNx_sOxnPurs8yUhbk4fivzMXR83Ir95CDrtI9B3rYHI755Hv90x2lGsJkbMW7H2v5bsX2fZMj5FjO3w-MSgWipI2qvwIrKD-kMIJ_gSWUNb6wgyQmADnpmFd2C7OSvDKkMIJ_gSoKvnvvgdNWN; __pus=7d626415788422964a91235bd188ce07AAQuPtNiKafO74bHQA8phjBKTVxsuJucRAdm8mg9sFf+0qWOkGrE1cxYVj03hriO2EZlicaF0G3pRiZT7YYrW1gc; __kp=8006ae10-2b43-11f0-8dc6-cf004eb593c5; __kps=AARU7wIFft+ykEyp6z8cXwiv; __ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==; __uid=AARU7wIFft+ykEyp6z8cXwiv; __puus=82d6b04033156bb42265e699df4c12a7AAS2Y5Jg3x98dIfZtjpR2VA7Acu27aiyl4rO9dfRONDxgHSAZ8zckZG4j+mvWPWbh+HlHHCaXxptbkXlcNqGjdatlXo5Ou5qI2narvAz/Fmj9Ls5Xoq5C8/GKF/FaOC5s2Ni+SojKO/c5idVs+BwcooU211fmHT1cSd+xA9K6gIWDN8ruK2naqM8fz1Gp6SWVd/EVLxXlE5oHvINPBvO7zHW","fid":"65b3da4439d04e29b467dd507cfc01f5","scrape":"./scrape.json", "bili_cookie":"enable_web_push=DISABLE; header_theme_version=CLOSE; DedeUserID=381443014; DedeUserID__ckMd5=49b2f01d2026b57c; buvid3=EC0051F7-7150-A882-FD22-4BB753FD262190472infoc; b_nut=1724847190; _uuid=F89659CA-FFBB-5B1C-E67D-1F8A4651EFD626102infoc; buvid_fp=68b5d26cbe6f7afc655acfed0082401b; rpdid=|(u)YJkmJY)Y0J'u~k)kuRlkk; home_feed_column=5; CURRENT_FNVAL=4048; b_lsid=10DE6BC510_196C4EE1C0D; buvid4=A8C13E7E-8E34-6852-40ED-9966B154403338301-025051222-ruMNL%2ByEjOfCeMpkaQzfJCH9Bq6DcMLyQPhGVnqZrTzqxckkFpVErbQ5cYId%2BUU4; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDczMTk4MzgsImlhdCI6MTc0NzA2MDU3OCwicGx0IjotMX0.K5iKE4XmIMTJJ4_VEYlbnF6vevENbsfn76zFH_LYxfc; bili_ticket_expires=1747319778; bp_t_offset_381443014=1066106458774437888; enable_feed_channel=ENABLE; browser_resolution=1872-928; SESSDATA=9fd0823f%2C1762612735%2Ccbdfe%2A51CjD_kYLLakAFnjgW4BLtqE7kWRODyAmPbnb5tb8zitt5LRXAqHWYsPBgI26EerwSVv4SVkhrUm9RYkU5WExnVk9KaXJieGNpWlJGZUlOdUowNUFseUpoN2pXYi1aZUJ0djRMbk9FRzR0X3UwRXlFS3EyN1Z4LUw5Z0pqUmhqOUU0RUdsMjEzVDBBIIEC; bili_jct=cf53ad972fbf31a106b770be48fc0e6a; sid=8bhfd62r"}
+  },
+  {
+    "key": "myQuark2",
+    "name": "我的夸克2",
+    "type": 3,
+    "api": "./plugin/anan.py",
+    "searchable": 1,
+    "quickSearch": 1,
+    "filterable": 1,
+    "ext": {"name":"可可","cookie":"b-user-id=2fd27d35-d390-8183-fd19-3a4790010e93; isg=BE5OHXRipTijoRGWCBC735OmnyQQzxLJaWu-s3iX_dEM2-w14Fv02SzZEwe3Qwrh; _UP_A4A_11_=wb9c91b81e7a4972bc0b151548c43fa3; _qk_bx_ck_v1=eyJkZXZpY2VJZCI6ImVDeSNBQU9XWHU3blZPQm9lc3JKcUJqS2tUbHg3OEM0ZVdLMmpMekp3OWpFRGVsTVBYUmRCQ20rWk83QnkwTlN2TFBOVjVjPSIsImRldmljZUZpbmdlcnByaW50IjoiNzhhMjg4Y2RlNDcyODk3ZGZlOTI1NTBlNGY2MTY3Y2YifQ==; tfstk=gcbrOHseFzUz5UbzKIYEbr-gIaYJ-U2s8w9Bt6fHNLvu2gs2-16eOU13eMW2yZsSRLwJ86X68Rw_5P1RwFL3CRG5I8vp7BgoZvghiUdQLem__P1RwjcrK5s05Xk5NkXHK9xkmEA6n4clKBv0gBAIED0lKsV2HBnn-QvnomAetpYH-9f0gBpDKjFlZ60213VIpoLiZ-8J4dfk3V5AuQqyQPpm-obDasJGZm0n-ZRy4ZXAja_vVMf9Xa1a8qL5_iYDTwFiYp-NxaTcr-4MDHjFKIIYLDJNx_sOxnPurs8yUhbk4fivzMXR83Ir95CDrtI9B3rYHI755Hv90x2lGsJkbMW7H2v5bsX2fZMj5FjO3w-MSgWipI2qvwIrKD-kMIJ_gSWUNb6wgyQmADnpmFd2C7OSvDKkMIJ_gSoKvnvvgdNWN; __pus=7d626415788422964a91235bd188ce07AAQuPtNiKafO74bHQA8phjBKTVxsuJucRAdm8mg9sFf+0qWOkGrE1cxYVj03hriO2EZlicaF0G3pRiZT7YYrW1gc; __kp=8006ae10-2b43-11f0-8dc6-cf004eb593c5; __kps=AARU7wIFft+ykEyp6z8cXwiv; __ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==; __uid=AARU7wIFft+ykEyp6z8cXwiv; __puus=82d6b04033156bb42265e699df4c12a7AAS2Y5Jg3x98dIfZtjpR2VA7Acu27aiyl4rO9dfRONDxgHSAZ8zckZG4j+mvWPWbh+HlHHCaXxptbkXlcNqGjdatlXo5Ou5qI2narvAz/Fmj9Ls5Xoq5C8/GKF/FaOC5s2Ni+SojKO/c5idVs+BwcooU211fmHT1cSd+xA9K6gIWDN8ruK2naqM8fz1Gp6SWVd/EVLxXlE5oHvINPBvO7zHW","fid":"65b3da4439d04e29b467dd507cfc01f5","scrape":"./scrape.json"}
+  },
+{"key": "csp_Alist", "name": "🅿️Alist网盘", "type": 3, "api": "csp_AList", "searchable": 1, "quickSearch": 1, "jar": "https://gitee.com/if00/python/raw/master/jpg/fm3.jpg;md5;5ad051e5034cffa30ad837c13e6aa9db", "ext": {"vodPic": "https://rogsoft.ddnsto.com/softcenter/softcenter/res/icon-alist.png", "drives": [{"name": "本地", "server": "http://127.0.0.1:5244/", "version": 3},{"name": "夸克盘", "server": "https://qvyzphokpzue.ap-southeast-1.clawcloudrun.com/", "login": {"username": "admin","password": "Asdf-4567"},"version": 3}]}},{"key": "非凡", "name": "🦉非凡┃资源", "type": 1, "api": "http://cj.ffzyapi.com/api.php/provide/vod/", "searchable": 1, "quickSearch": 1, "filterable": 1, "categories": ["国产剧", "大陆综艺", "记录片", "动作片", "喜剧片", "爱情片", "科幻片", "剧情片", "战争片", "欧美剧", "韩国剧", "香港剧", "港台综艺", "日韩综艺", "欧美综艺", "国产动漫", "日韩动漫", "欧美动漫", "体育赛事"]},
+{"key": "量子", "name": "🏂量子┃资源", "type": 1, "api": "https://cj.lziapi.com/api.php/provide/vod/", "searchable": 1, "quickSearch": 1, "filterable": 1, "categories": ["国产剧", "国产动漫", "香港剧", "欧美剧", "韩国剧", "动漫", "体育", "剧情片", "动作片", "爱情片", "喜剧片"]}], "logo": "https://cdn.wmpvp.com/steamWeb/B96F868DE45B45D690B5F9F490D0BC60-1745866248445.gif", 
+"lives": [{"name": "山东移动", "type": 0, "url": "http://ghproxy.net/https://raw.githubusercontent.com/zj1257/sqmrts/json/JS/sdydlive.txt", "playerType": 1, "ua": "okhttp/3.15", "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}", "logo": "https://epg.iill.top/logo/{name}.png"},
+{"name": "钵钵鸡", "type": 0, "url": "https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736923192652/boboji.m3u", "playerType": 1},
+{"name": "V6范明明（需开启V6网络）", "type": 0, "url": "https://scrm-community.oss-cn-shenzhen.aliyuncs.com/miniso-vendor/20250425-868403-298462cec53c48439a5765ceaca3c67f.m3u", "playerType": 2},
+{"name": "牛播一（仅新版影视仓┃ok影视）", "type": 0, "url": "http://127.0.0.1:9978/proxy?do=饭太硬&type=liveList", "playerType": 2, "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}", "logo": "https://epg.v1.mk/logo/{name}.png"},
+{"name": "V4聚合（卡顿请按左┃右键换线）", "type": 0, "url": "https://gh-proxy.net/https://raw.githubusercontent.com/wwb521/live/main/tv.m3u", "playerType": 2, "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}", "logo": "https://epg.v1.mk/logo/{name}.png"},
+{"name": "平台直播", "type": 0, "url": "http://tv.iill.top/m3u/Live", "ua": "okhttp/3.15", "playerType": 2}]}

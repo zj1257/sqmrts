@@ -1,0 +1,644 @@
+{
+    "sites": [
+        {
+            "key": "py_爱壹帆",
+            "name": "爱壹帆(py)",
+            "type": 3,
+            "api": "./py/爱壹帆.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_anan",
+            "name": "anan(py)",
+            "type": 3,
+            "api": "./py/anan.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_cnotv",
+            "name": "cnotv(py)",
+            "type": 3,
+            "api": "./py/cnotv.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_厂长资源 (2)",
+            "name": "厂长资源 (2)(py)",
+            "type": 3,
+            "api": "./py/厂长资源 (2).py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_泥视频",
+            "name": "泥视频(py)",
+            "type": 3,
+            "api": "./py/泥视频.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_LREEOK",
+            "name": "html_LREEOK(py)",
+            "type": 3,
+            "api": "./py/html/LREEOK.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_4KAV",
+            "name": "html_4KAV(py)",
+            "type": 3,
+            "api": "./py/html/4KAV.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_LIVES",
+            "name": "html_LIVES(py)",
+            "type": 3,
+            "api": "./py/html/LIVES.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_偷乐短剧",
+            "name": "html_偷乐短剧(py)",
+            "type": 3,
+            "api": "./py/html/偷乐短剧.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_剧粑粑",
+            "name": "html_剧粑粑(py)",
+            "type": 3,
+            "api": "./py/html/剧粑粑.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_嗷呜动漫",
+            "name": "html_嗷呜动漫(py)",
+            "type": 3,
+            "api": "./py/html/嗷呜动漫.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_好帅短剧",
+            "name": "html_好帅短剧(py)",
+            "type": 3,
+            "api": "./py/html/好帅短剧.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_小红影视",
+            "name": "html_小红影视(py)",
+            "type": 3,
+            "api": "./py/html/小红影视.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_旺旺",
+            "name": "html_旺旺(py)",
+            "type": 3,
+            "api": "./py/html/旺旺.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_柯南影视",
+            "name": "html_柯南影视(py)",
+            "type": 3,
+            "api": "./py/html/柯南影视.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_甜圈短剧",
+            "name": "html_甜圈短剧(py)",
+            "type": 3,
+            "api": "./py/html/甜圈短剧.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_红果网页",
+            "name": "html_红果网页(py)",
+            "type": 3,
+            "api": "./py/html/红果网页.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_绝对影视",
+            "name": "html_绝对影视(py)",
+            "type": 3,
+            "api": "./py/html/绝对影视.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_金牌",
+            "name": "html_金牌(py)",
+            "type": 3,
+            "api": "./py/html/金牌.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_html_骚火电影",
+            "name": "html_骚火电影(py)",
+            "type": 3,
+            "api": "./py/html/骚火电影.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_MiFunAPP",
+            "name": "app_MiFunAPP(py)",
+            "type": 3,
+            "api": "./py/app/MiFunAPP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_APPV2",
+            "name": "app_APPV2(py)",
+            "type": 3,
+            "api": "./py/app/APPV2.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_CliCli动漫APP",
+            "name": "app_CliCli动漫APP(py)",
+            "type": 3,
+            "api": "./py/app/CliCli动漫APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_hitvAPP",
+            "name": "app_hitvAPP(py)",
+            "type": 3,
+            "api": "./py/app/hitvAPP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_三号动漫APP",
+            "name": "app_三号动漫APP(py)",
+            "type": 3,
+            "api": "./py/app/三号动漫APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_云端APP",
+            "name": "app_云端APP(py)",
+            "type": 3,
+            "api": "./py/app/云端APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_云速影视APP",
+            "name": "app_云速影视APP(py)",
+            "type": 3,
+            "api": "./py/app/云速影视APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_光速APP",
+            "name": "app_光速APP(py)",
+            "type": 3,
+            "api": "./py/app/光速APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_剧多短剧APP",
+            "name": "app_剧多短剧APP(py)",
+            "type": 3,
+            "api": "./py/app/剧多短剧APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_哇哇APP",
+            "name": "app_哇哇APP(py)",
+            "type": 3,
+            "api": "./py/app/哇哇APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_国外剧APP",
+            "name": "app_国外剧APP(py)",
+            "type": 3,
+            "api": "./py/app/国外剧APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_奇迹APP",
+            "name": "app_奇迹APP(py)",
+            "type": 3,
+            "api": "./py/app/奇迹APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_小苹果APP",
+            "name": "app_小苹果APP(py)",
+            "type": 3,
+            "api": "./py/app/小苹果APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_恋鱼影视APP",
+            "name": "app_恋鱼影视APP(py)",
+            "type": 3,
+            "api": "./py/app/恋鱼影视APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_悠悠APP",
+            "name": "app_悠悠APP(py)",
+            "type": 3,
+            "api": "./py/app/悠悠APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_海马影视APP",
+            "name": "app_海马影视APP(py)",
+            "type": 3,
+            "api": "./py/app/海马影视APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_热播APP",
+            "name": "app_热播APP(py)",
+            "type": 3,
+            "api": "./py/app/热播APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_火车太顺APP",
+            "name": "app_火车太顺APP(py)",
+            "type": 3,
+            "api": "./py/app/火车太顺APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_爱瓜TVAPP",
+            "name": "app_爱瓜TVAPP(py)",
+            "type": 3,
+            "api": "./py/app/爱瓜TVAPP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_皮皮虾APP",
+            "name": "app_皮皮虾APP(py)",
+            "type": 3,
+            "api": "./py/app/皮皮虾APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_美帕APP",
+            "name": "app_美帕APP(py)",
+            "type": 3,
+            "api": "./py/app/美帕APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_胖虎APP",
+            "name": "app_胖虎APP(py)",
+            "type": 3,
+            "api": "./py/app/胖虎APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_若惜追剧APP",
+            "name": "app_若惜追剧APP(py)",
+            "type": 3,
+            "api": "./py/app/若惜追剧APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_边缘影视APP",
+            "name": "app_边缘影视APP(py)",
+            "type": 3,
+            "api": "./py/app/边缘影视APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_零度影视APP",
+            "name": "app_零度影视APP(py)",
+            "type": 3,
+            "api": "./py/app/零度影视APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_视觉APP",
+            "name": "app_视觉APP(py)",
+            "type": 3,
+            "api": "./py/app/视觉APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_app_魔方影视APP",
+            "name": "app_魔方影视APP(py)",
+            "type": 3,
+            "api": "./py/app/魔方影视APP.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_official_腾",
+            "name": "official_腾(py)",
+            "type": 3,
+            "api": "./py/official/腾.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_official_芒",
+            "name": "official_芒(py)",
+            "type": 3,
+            "api": "./py/official/芒.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_official_优",
+            "name": "official_优(py)",
+            "type": 3,
+            "api": "./py/official/优.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_official_爱",
+            "name": "official_爱(py)",
+            "type": 3,
+            "api": "./py/official/爱.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_bilibilimd",
+            "name": "旧_py_bilibilimd(py)",
+            "type": 3,
+            "api": "./py/旧/py_bilibilimd.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_czspp_bing",
+            "name": "旧_py_czspp_bing(py)",
+            "type": 3,
+            "api": "./py/旧/py_czspp_bing.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_cctvdh",
+            "name": "旧_py_cctvdh(py)",
+            "type": 3,
+            "api": "./py/旧/py_cctvdh.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_libvio",
+            "name": "旧_py_libvio(py)",
+            "type": 3,
+            "api": "./py/旧/py_libvio.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_ikan",
+            "name": "旧_py_ikan(py)",
+            "type": 3,
+            "api": "./py/旧/py_ikan.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_cyys",
+            "name": "旧_py_cyys(py)",
+            "type": 3,
+            "api": "./py/旧/py_cyys.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_cctv",
+            "name": "旧_py_cctv(py)",
+            "type": 3,
+            "api": "./py/旧/py_cctv.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_czspp",
+            "name": "旧_py_czspp(py)",
+            "type": 3,
+            "api": "./py/旧/py_czspp.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_bilivdmd",
+            "name": "旧_py_bilivdmd(py)",
+            "type": 3,
+            "api": "./py/旧/py_bilivdmd.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_bilivd",
+            "name": "旧_py_bilivd(py)",
+            "type": 3,
+            "api": "./py/旧/py_bilivd.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_bilimd",
+            "name": "旧_py_bilimd(py)",
+            "type": 3,
+            "api": "./py/旧/py_bilimd.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_bilibili",
+            "name": "旧_py_bilibili(py)",
+            "type": 3,
+            "api": "./py/旧/py_bilibili.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_旧_py_alist",
+            "name": "旧_py_alist(py)",
+            "type": 3,
+            "api": "./py/旧/py_alist.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        }
+    ]
+}
