@@ -38,7 +38,7 @@ class Spider(Spider):
             if cookies_dict:
                 cookies = requests.utils.cookiejar_from_dict(cookies_dict)
                 self.s.cookies.update(cookies)
-        self.fid = str(extendDict['fid'] if 'fid' in extendDict else "0")
+        #self.fid = str(extendDict['fid'] if 'fid' in extendDict else "0")
         try:
             scrape_str = str(extendDict['scrape'] if 'scrape' in extendDict else "")
             scrape_str = self.fetch(scrape_str, timeout=10).text.strip()
@@ -49,6 +49,10 @@ class Spider(Spider):
             self.type_name = extendDict['name']+"专属"
         except:
             self.type_name = "安安专属"
+        try:
+            self.classname = extendDict['folders']
+        except:
+            self.classname = []
         try:
             self.is_vip = self.get_vip()
             print("是否VIP：", self.is_vip)
@@ -80,7 +84,6 @@ class Spider(Spider):
         
 
     def getscrape(self, fid):
-        self.log(self.scrape_json["scrape"])
         for i in self.scrape_json["scrape"]:
             if fid == i['folder']:
                 if i['imgurl'] == "":
@@ -115,12 +118,16 @@ class Spider(Spider):
         if r['data']:
             nickname = r['data']['nickname']
             print(nickname)
-            fname = [self.type_name, self.fid]
+            #fname = [self.type_name, self.fid]
         else:
             fname = ["登录失败！请正确配置夸克Cookie。","error"]
-        result['class'] = [{"type_name": fname[0], "type_id": fname[1], "type_flag": "1"}]
+        result['class'] = [{"type_name": self.type_name, "type_id": "65b3da4439d04e29b467dd507cfc01f5", "type_flag": "1"}]
         if self.b.cookies:
             result['class'].append({"type_name": "B站收藏", "type_id": "fav&&&1722080014", "type_flag": "1"})
+        for i in self.classname:
+            result['class'].append({"type_name": i["name"], "type_id": i["fid"], "type_flag": "1"})
+        self.log(result)
+        self.fid_name={i["type_id"]:i["type_name"] for i in result['class']}
         return result
 
     def homeVideoContent(self):
@@ -199,6 +206,7 @@ class Spider(Spider):
             return result
         # 以上为对B站收藏夹的处理
         self.log(tid)
+        pName = None
         if "folder" in tid:
             fid = json.loads(tid)
             tid = fid['folder']
@@ -245,7 +253,7 @@ class Spider(Spider):
                 params['folder'] = video["fid"]
                 params['parentId'] = video["pdir_fid"]
                 params['fileType'] = "file"
-                params['fileName'] = pName
+                params['fileName'] = self.fid_name[tid] if pName is None else pName
                 videos.append({
                     "vod_id": json.dumps(params, ensure_ascii=False),
                     "vod_name": video['fileName'],
@@ -385,7 +393,7 @@ class Spider(Spider):
             result["format"] = 'application/dash+xml'
             return result
         if '可可' in self.type_name:
-            proxy_url = f'http://127.0.0.1:9978/proxy?do=pan&site=quark&shareId=&fileId={file_id}&fileToken='
+            proxy_url = f'http://127.0.0.1:9978/proxy?do=push&site=quark&shareId=&fileId={file_id}&fileToken='
             header = self.s.headers
             header['Cookie'] = self.cookie
             header["Referer"] = "https://pan.quark.cn/"
@@ -666,3 +674,15 @@ class Spider(Spider):
         from re import sub, compile
         clean = compile('<.*?>')
         return sub(clean, '', src)
+
+if __name__ == "__main__":
+    sp = Spider()
+    formatJo = sp.init({"cookie": "ctoken=npnC1oqZWWEXIwoeS9KlbM0i;b-user-id=582bd5d8-437f-b391-111a-4a1223574726;grey-id=4598be75-34c9-7ab0-a8a6-5cf6f97d71a5;grey-id.sig=_9dJ-Mnel-rHI64VwBH4A7UmiwQB-tfuZYoKyKFBDdg;isQuark=true;isQuark.sig=hUgqObykqFom5Y09bll94T1sS9abT1X-4Df_lzgl8nM;__wpkreporterwid_=755685c9-5f55-4a85-16d2-5ae412781ee5;_UP_A4A_11_=wb9cc1fec77a4868bc0dfd51f406597a;_UP_D_=pc;_UP_F7E_8D_=OU7RkS5Fl8As%2BzBYApELkZAj1vmg8xVBJrecefKxOw3mXKC6HZxA28beRDVDsfr9xbHg71N%2BX%2BRLHpvA%2Fhicy1HUTu2LBlCPom4qTWeMFqCgN55FQx3lIyu%2B1OsWIKjG1w4pOGWcZjvuo4m2jHof9eRj66wpeTPO4r7NBD%2F4wEE0IpjIBHWretgcndtvmRjOzww5cstuAQbqUw8FWZQadLzk4nczcPLP1rSgCMVm5ws2Z%2BPyTAVLm9DknFGHhIbrCg%2FZdcEvIQgqhPgIQ9TgLP9Y4da5UPkfCOADGv8v9D8VOMEdD6uzZJXMxBnUatpyAHLu79tlMNqP8TGNMQXXgvSqK5ufzR58ZeivnehV0qE%2FWt1yDEDt%2BfWrmT4mVs6zZWXvqpzmoV3MeygIUCEakjmqUpi%2BMoCaK%2BK%2BYrCYUbg6F8u7yQFbh%2F0Q7RCSfK2U6tAXQttwc%2FtDK7HYGyvolg%3D%3D;tfstk=gdYjeTwNxs-r0NKdcNlzRQaebD72lbuEG519tCU46ZQYWdOGUsrqmGk6VdpPHEoc3L66TC4N3I7x1d9phGJ6sjfOBdp1Qnor8IAcSNHeC2ueir9IY89fXGe-615YHbSAj7bJ0NHEL4umljj1WdrIzGJWwTf1MPI9B7h51s_TkGUY28Bl6NQODrF8y6CYB1CADbORE1QOBdQtNaBl6NB9BNdUkf5oX9AjOUiYjYFMoIB7WPLjRZBBwlzYkU1fnQdAFiS2PssfLGhcZnY9OCLVPHwt5TLDgULPcz0NeHOOl_j01P_9gTvC3dIy5yWCWqr_jtUON9lSNlqiW11iP9rLb-jAZ_-jNbZw3iClN9lSNlqGD_f8SbG7bK5..;_UP_30C_6A_=st9cc6201318cqglt3sp1g8fbcj2pb42;_UP_TS_=sg1222464072d5f810b2b10b4b969a7a5b6;_UP_E37_B7_=sg1222464072d5f810b2b10b4b969a7a5b6;_UP_TG_=st9cc6201318cqglt3sp1g8fbcj2pb42;_UP_335_2B_=1;__pus=9419630a8d4424a7f9cc41b0930be35eAASj/4qJ52RjX8qn7AlYxg7cddJr4+vdfOmEnuwvz8LYHcdQAZwbbJIPERgqJCGCrMyRhBNDVnZICA22AfattChN;__kp=84eee170-74f6-11f0-a1f3-c9db997168c5;__kps=AARU7wIFft+ykEyp6z8cXwiv;__ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==;__uid=AARU7wIFft+ykEyp6z8cXwiv;web-grey-id=70a92f0b-349c-7700-6c2f-8adf211cb121;web-grey-id.sig=t3jsYfI-WdMKo-3F6u4ZldLwP8s6bWU6L4-Ff-_6UiE;__puus=5c66c8a647563725e551524f46ec7596AAS2Y5Jg3x98dIfZtjpR2VA71pxZGhZMIDihyx/EYlROvsmZv+bJN/X1gFkZA6PES1H8Z9Pvkzvdggrf5fyUsQeKEx9wdN4lSAydcUDovm3Tkrdx+TTYbj+aUZ5a99JdGXSR/MI0bIxbpgBeb/x8CgEcEtWS1guENuh9bxOjUAy8CycUkQgHgSQMXGB86gCE2tRhdaTh2AJ8xO4Y93xLNcGt",'folders':[{'name':'健身','fid':'cc3761c593aa49088d087f8fe29be3ae'},{'name':'影视','fid':'360901f97f734fc685af32db3ad3e6e6'}], "scrape": "https://gitee.com/if00/python/raw/master/png/scrape.png", "bili_cookie": "enable_web_push=DISABLE; header_theme_version=CLOSE; DedeUserID=381443014; DedeUserID__ckMd5=49b2f01d2026b57c; buvid3=EC0051F7-7150-A882-FD22-4BB753FD262190472infoc; b_nut=1724847190; _uuid=F89659CA-FFBB-5B1C-E67D-1F8A4651EFD626102infoc; buvid_fp=68b5d26cbe6f7afc655acfed0082401b; rpdid=|(u)YJkmJY)Y0J'u~k)kuRlkk; home_feed_column=5; CURRENT_FNVAL=4048; b_lsid=10DE6BC510_196C4EE1C0D; buvid4=A8C13E7E-8E34-6852-40ED-9966B154403338301-025051222-ruMNL%2ByEjOfCeMpkaQzfJCH9Bq6DcMLyQPhGVnqZrTzqxckkFpVErbQ5cYId%2BUU4; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDczMTk4MzgsImlhdCI6MTc0NzA2MDU3OCwicGx0IjotMX0.K5iKE4XmIMTJJ4_VEYlbnF6vevENbsfn76zFH_LYxfc; bili_ticket_expires=1747319778; bp_t_offset_381443014=1066106458774437888; enable_feed_channel=ENABLE; browser_resolution=1872-928; SESSDATA=9fd0823f%2C1762612735%2Ccbdfe%2A51CjD_kYLLakAFnjgW4BLtqE7kWRODyAmPbnb5tb8zitt5LRXAqHWYsPBgI26EerwSVv4SVkhrUm9RYkU5WExnVk9KaXJieGNpWlJGZUlOdUowNUFseUpoN2pXYi1aZUJ0djRMbk9FRzR0X3UwRXlFS3EyN1Z4LUw5Z0pqUmhqOUU0RUdsMjEzVDBBIIEC; bili_jct=cf53ad972fbf31a106b770be48fc0e6a; sid=8bhfd62r"}) # 初始化
+    # formatJo = sp.homeContent(False) # 筛选分类(首页 可选)
+    # formatJo = sp.homeVideoContent() # (首页 可选)
+    # formatJo = sp.searchContent("斗罗",False,'1') # 搜索
+    formatJo = sp.categoryContent('360901f97f734fc685af32db3ad3e6e6', '1', False, {}) # 分类
+    # formatJo = sp.detailContent(['139625']) # 详情
+    # formatJo = sp.playerContent("","",{}) # 播放
+    # formatJo = sp.localProxy({"":""}) # 代理
+    print(formatJo)
