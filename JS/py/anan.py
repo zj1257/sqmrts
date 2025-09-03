@@ -393,7 +393,7 @@ class Spider(Spider):
             result["format"] = 'application/dash+xml'
             return result
         if '可可' in self.type_name:
-            proxy_url = f'http://127.0.0.1:9978/proxy?do=py&site=quark&shareId=&fileId={file_id}&fileToken='
+            proxy_url = f'http://127.0.0.1:9978/proxy?do=pan&site=quark&shareId=&fileId={file_id}&fileToken='
             header = self.s.headers
             header['Cookie'] = self.cookie
             header["Referer"] = "https://pan.quark.cn/"
