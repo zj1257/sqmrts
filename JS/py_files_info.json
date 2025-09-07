@@ -11,16 +11,6 @@
             "changeable": 1
         },
         {
-            "key": "py_anan",
-            "name": "anan(py)",
-            "type": 3,
-            "api": "./py/anan.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
             "key": "py_cnotv",
             "name": "cnotv(py)",
             "type": 3,
@@ -45,6 +35,26 @@
             "name": "泥视频(py)",
             "type": 3,
             "api": "./py/泥视频.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_anan",
+            "name": "anan(py)",
+            "type": 3,
+            "api": "./py/anan.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "py_py_guazi",
+            "name": "py_guazi(py)",
+            "type": 3,
+            "api": "./py/py_guazi.py",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
@@ -465,146 +475,6 @@
             "name": "app_魔方影视APP(py)",
             "type": 3,
             "api": "./py/app/魔方影视APP.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_51吸瓜",
-            "name": "adult_51吸瓜(py)",
-            "type": 3,
-            "api": "./py/adult/51吸瓜.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_Phb",
-            "name": "adult_Phb(py)",
-            "type": 3,
-            "api": "./py/adult/Phb.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_lavAPP",
-            "name": "adult_lavAPP(py)",
-            "type": 3,
-            "api": "./py/adult/lavAPP.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_香蕉APP",
-            "name": "adult_香蕉APP(py)",
-            "type": 3,
-            "api": "./py/adult/香蕉APP.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_Miss",
-            "name": "adult_Miss(py)",
-            "type": 3,
-            "api": "./py/adult/Miss.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_Xvd",
-            "name": "adult_Xvd(py)",
-            "type": 3,
-            "api": "./py/adult/Xvd.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_小红薯APP",
-            "name": "adult_小红薯APP(py)",
-            "type": 3,
-            "api": "./py/adult/小红薯APP.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_推特APP",
-            "name": "adult_推特APP(py)",
-            "type": 3,
-            "api": "./py/adult/推特APP.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_浴火社APP",
-            "name": "adult_浴火社APP(py)",
-            "type": 3,
-            "api": "./py/adult/浴火社APP.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_花都",
-            "name": "adult_花都(py)",
-            "type": 3,
-            "api": "./py/adult/花都.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_DSYS",
-            "name": "adult_DSYS(py)",
-            "type": 3,
-            "api": "./py/adult/DSYS.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_Xhm",
-            "name": "adult_Xhm(py)",
-            "type": 3,
-            "api": "./py/adult/Xhm.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_py_stripchat",
-            "name": "adult_py_stripchat(py)",
-            "type": 3,
-            "api": "./py/adult/py_stripchat.py",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "py_adult_onlyfans gv",
-            "name": "adult_onlyfans gv(py)",
-            "type": 3,
-            "api": "./py/adult/onlyfans gv.py",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
