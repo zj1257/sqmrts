@@ -135,7 +135,8 @@ class Spider(Spider):
             for resolution, urls in vod['play'].items():
                 if urls['param'] == "":
                     continue
-                playUrl += f'"{resolution}P","{{"vid":"{vid}","uid":"{uid}","resolution":"{resolution}"}}",'
+                # playUrl += f'"{resolution}P","{{"vid":"{vid}","uid":"{uid}","resolution":"{resolution}"}}",'
+                playUrl += f'{vid}|{uid}|{resolution}'
             playUrls += f"{vod['title']}$[{playUrl.strip(',')}]#"
         playUrls = playUrls.strip("#")
         video["vod_play_url"] = playUrls
@@ -174,10 +175,15 @@ class Spider(Spider):
         return {'list': videos,'page': pg}
 
     def playerContent(self, flag, pid, vipFlags):
-        params = json.loads(pid)
-        vid = params["vid"]
-        uid = params["uid"]
-        resolution = params["resolution"]
+        #params = json.loads(pid)
+        params = pid.spilt('|')
+        print(str(params))
+        #vid = params["vid"]
+        #uid = params["uid"]
+        #resolution = params["resolution"]
+        vid = params[0]
+        uid = params[1]
+        resolution = params[2]
         src = f'{{"domain_type":"8","vod_id": "{vid}","type":"play","resolution": "{resolution}","vurl_id": "{uid}"}}'
         timestamp = int(time.time())
         timestamp = str(timestamp)
@@ -230,3 +236,14 @@ class Spider(Spider):
         decrypted = cipher.decrypt(encrypted_hex)
         return unpad(decrypted, AES.block_size).decode('utf-8')
 
+if __name__ == "__main__":
+    sp = Spider()
+    formatJo = sp.init([]) # 初始化
+    # formatJo = sp.homeContent(False) # 筛选分类(首页 可选)
+    # formatJo = sp.homeVideoContent() # (首页 可选)
+    # formatJo = sp.searchContent("斗罗",False,'1') # 搜索
+    # formatJo = sp.categoryContent('', '1', False, {}) # 分类
+    formatJo = sp.detailContent(['49979']) # 详情
+    # formatJo = sp.playerContent("","",{}) # 播放
+    # formatJo = sp.localProxy({"":""}) # 代理
+    print(formatJo)
