@@ -63,12 +63,8 @@ class Spider(Spider):
 
     def homeContent(self, filter):
         result = {}
-        classes = [{'type_name': '女主播', 'type_id': 'girls'}, {'type_name': '情侣', 'type_id': 'couples'}, {'type_name': '男主播', 'type_id': 'men'}]
-        filters = {
-            'girls': [{'key': 'tag', 'value': [{'n': '中国', 'v': 'tagLanguageChinese'}, {'n': '美国', 'v': 'tagLanguageUSModels'}]}],
-            'couples': [{'key': 'tag', 'value': [{'n': '中国', 'v': 'tagLanguageChinese'}, {'n': '美国', 'v': 'tagLanguageUSModels'}]}],
-            'men': [{'key': 'tag', 'value': [{'n': '中国', 'v': 'tagLanguageChinese'}, {'n': '美国', 'v': 'tagLanguageUSModels'}, {'n': '情侣', 'v': 'sexGayCouples'}, {'n': '直男', 'v': 'orientationStraight'}]}]
-        }
+        classes = [{'type_name': '电影', 'type_id': '1'}, {'type_name': '电视剧', 'type_id': '2'}, {'type_name': '综艺', 'type_id': '3'}, {'type_name': '动漫', 'type_id': '4'}, {'type_name': '短剧', 'type_id': '64'}]
+        filters = {}
         result['class'] = classes
         result['filters'] = filters
         return result
@@ -135,9 +131,8 @@ class Spider(Spider):
             for resolution, urls in vod['play'].items():
                 if urls['param'] == "":
                     continue
-                # playUrl += f'"{resolution}P","{{"vid":"{vid}","uid":"{uid}","resolution":"{resolution}"}}",'
-                playUrl += f'{vid}|{uid}|{resolution}'
-            playUrls += f"{vod['title']}$[{playUrl.strip(',')}]#"
+                playUrl += f'{vid}|{uid}|{resolution}@@'
+            playUrls += f"{vod['title']}${playUrl.strip('@@')}#"
         playUrls = playUrls.strip("#")
         video["vod_play_url"] = playUrls
         result = {'list': [video]}
@@ -175,31 +170,30 @@ class Spider(Spider):
         return {'list': videos,'page': pg}
 
     def playerContent(self, flag, pid, vipFlags):
-        #params = json.loads(pid)
-        params = pid.spilt('|')
-        print(str(params))
-        #vid = params["vid"]
-        #uid = params["uid"]
-        #resolution = params["resolution"]
-        vid = params[0]
-        uid = params[1]
-        resolution = params[2]
-        src = f'{{"domain_type":"8","vod_id": "{vid}","type":"play","resolution": "{resolution}","vurl_id": "{uid}"}}'
-        timestamp = int(time.time())
-        timestamp = str(timestamp)
-        src = self.encrypt(src)
-        keys = "ZH8gpdp9bxjuG2NK97sol3o7Uiz+9eVEaVMlE2Fk3j7EResM3YHnECZUH7BONNTjpy7RVNi/YimGuNYriC7Cmswv4PNYiFYzw9QhlqZKwNfCM6IUpFZ0T4rZx8G78zkv2tNVbfYC4qNQedGi07nWZ33dlSuVxROVfY5JxOWHMI0="
-        postBody = self.getSignature(src, keys, timestamp)
-        url = "https://api.8utdtcq.com/App/Resource/VurlDetail/showOne"
-        r = requests.post(url, headers=self.headers, data=postBody)
-        banner = r.json()['data']
-        responseKey = banner['response_key']
-        bodyKeyIV = json.loads(self.rsaDecrypt(banner['keys'], publicKey))
-        html = self.decrypt(responseKey, bodyKeyIV['key'], bodyKeyIV['iv'])
-        url = json.loads(html)['url']
-
+        huazhis = pid.split('@@')
+        urls = []
+        for huazhi in huazhis:
+            params = huazhi.split('|')
+            vid = params[0]
+            uid = params[1]
+            resolution = params[2]
+            self.log(f"{vid}|{uid}|{resolution}")
+            src = f'{{"domain_type":"8","vod_id": "{vid}","type":"play","resolution": "{resolution}","vurl_id": "{uid}"}}'
+            timestamp = int(time.time())
+            timestamp = str(timestamp)
+            src = self.encrypt(src)
+            keys = "ZH8gpdp9bxjuG2NK97sol3o7Uiz+9eVEaVMlE2Fk3j7EResM3YHnECZUH7BONNTjpy7RVNi/YimGuNYriC7Cmswv4PNYiFYzw9QhlqZKwNfCM6IUpFZ0T4rZx8G78zkv2tNVbfYC4qNQedGi07nWZ33dlSuVxROVfY5JxOWHMI0="
+            postBody = self.getSignature(src, keys, timestamp)
+            url = "https://api.8utdtcq.com/App/Resource/VurlDetail/showOne"
+            r = requests.post(url, headers=self.headers, data=postBody)
+            banner = r.json()['data']
+            responseKey = banner['response_key']
+            bodyKeyIV = json.loads(self.rsaDecrypt(banner['keys'], publicKey))
+            html = self.decrypt(responseKey, bodyKeyIV['key'], bodyKeyIV['iv'])
+            urls += [f"{resolution}P",json.loads(html)['url']]
+        self.log(urls)
         result = {}
-        result["url"] = url
+        result["url"] = urls
         result["parse"] = '0'
         result["contentType"] = ''
         result["header"] = self.headers
@@ -235,15 +229,3 @@ class Spider(Spider):
         encrypted_hex = bytes.fromhex(src)
         decrypted = cipher.decrypt(encrypted_hex)
         return unpad(decrypted, AES.block_size).decode('utf-8')
-
-if __name__ == "__main__":
-    sp = Spider()
-    formatJo = sp.init([]) # 初始化
-    # formatJo = sp.homeContent(False) # 筛选分类(首页 可选)
-    # formatJo = sp.homeVideoContent() # (首页 可选)
-    # formatJo = sp.searchContent("斗罗",False,'1') # 搜索
-    # formatJo = sp.categoryContent('', '1', False, {}) # 分类
-    formatJo = sp.detailContent(['49979']) # 详情
-    # formatJo = sp.playerContent("","",{}) # 播放
-    # formatJo = sp.localProxy({"":""}) # 代理
-    print(formatJo)
