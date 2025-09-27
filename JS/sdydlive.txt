@@ -626,15 +626,15 @@ MOMOTV,rtmp://f13h.mine.nu/sat/tv761
 
 父母爱看,#genre#
 JJ斗地主,http://tc-tct.douyucdn2.cn/dyliveflv1a/488743rAHScWyyII_2000.flv?wsAuth=fd695c444eeee99cc6122ed396c805ba&token=cpn-androidmpro-0-488743-df8b1830ef2e6ce156759645768df95bf77749da61fcc901&logo=0&expire=0&did=d010b07dcb997ada9934081c873542f0&origin=tct&vhost=play2
-JJ斗地主,http://dns.yiandrive.com:15907/bilibili/22021983
-http://dns.yiandrive.com:15907/huya/14079954
-JJ斗地主,http://dns.yiandrive.com:15907/douyu/488743
+JJ斗地主,http://i.iill.top:12838/bilibili/22021983
+http://i.iill.top:12838/huya/14079954
+JJ斗地主,http://i.iill.top:12838/douyu/488743
 JJ斗地主,http://tc-tct.douyucdn2.cn/dyliveflv1a/488743rAHScWyyII_2000.flv?wsAuth=af68f33dc536a0fb76a514b2dcce8f6b&token=cpn-androidmpro-0-488743-df8b1830ef2e6ce1e55031a221b1d3b7dfd1c7e0d6d57314&logo=0&expire=0&did=d010b07dcb997ada9934081c873542f0&origin=tct&vhost=play2
-宋小宝小品,http://dns.yiandrive.com:15907/douyu/9817729
-宋小宝小品,http://dns.yiandrive.com:15907/yy/1354931577
-赵本山小品,http://dns.yiandrive.com:15907/douyu/9817716
-赵本山小品,http://dns.yiandrive.com:15907/yy/1354936217
-贾玲经典小品,http://dns.yiandrive.com:15907/douyu/10419541
-父母爱情,http://dns.yiandrive.com:15907/huya/11602071
-父母爱情,http://dns.yiandrive.com:15907/yy/1354926650
-雪豹2,http://dns.yiandrive.com:15907/yy/1450496699
+宋小宝小品,http://i.iill.top:12838/douyu/9817729
+宋小宝小品,http://i.iill.top:12838/yy/1354931577
+赵本山小品,http://i.iill.top:12838/douyu/9817716
+赵本山小品,http://i.iill.top:12838/yy/1354936217
+贾玲经典小品,http://i.iill.top:12838/douyu/10419541
+父母爱情,http://i.iill.top:12838/huya/11602071
+父母爱情,http://i.iill.top:12838/yy/1354926650
+雪豹2,http://i.iill.top:12838/yy/1450496699
