@@ -50,7 +50,7 @@ def generate_py_json(folder_path, output_file):
 
 # 使用示例
 if __name__ == "__main__":
-    black = ["小白调试示例","_adult_","分类筛选生成"]
+    black = ["小白调试示例","_，adult_","分类筛选生成"]
     # 替换为你的目标文件夹路径
     target_folder = "./py"
     # 输出的JSON文件名
