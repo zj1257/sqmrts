@@ -6,6 +6,7 @@ import urllib3 # 屏蔽ssl warning
 urllib3.disable_warnings(urllib3.connectionpool.InsecureRequestWarning)
 import json
 from prettytable import PrettyTable
+import os
 
 s = requests.Session()
 s.headers = {
@@ -107,6 +108,7 @@ def scrapeMovieId(file_name):
             if len(videos) == 1:
                 return item
             scrapes.append(item)
+        print(tb)
         index = int(input("请根据序号选择剧集："))
         print("你选择的剧集是：")
         print("{:<3} {:<10} {:<20} {:<5} {:<10} {:<50}".format(str(index), scrapes[index]["id"], scrapes[index]["title"], str(scrapes[index]["year"]), scrapes[index]["type"], scrapes[index]["remark"]))
@@ -139,55 +141,129 @@ def getScrapeInfos(item):
     print(vodList)
     return vodList
 
+# 选择菜单
+print("=== 请选择 ===")
+print("1. 生成文件列表，手动加图片")
+print("2. 自动刮削")
+print("3. 手动刮削")
+
+# 获取用户输入并处理
+while True:
+    choice = input("\n请输入选项编号（1-3）：")
+    if choice == "1":
+        print("你选择了【生成文件列表】")
+        AUTO = True
+        LIST = True
+        break
+    elif choice == "2":
+        print("你选择了【自动刮削】")
+        # 自动刮削
+        AUTO = True
+        LIST = False
+        break
+    elif choice == "3":
+        print("你选择了【手动刮削】")
+        # 自动刮削
+        AUTO = False
+        LIST = False
+        break
+    else:
+        print("输入错误！请仅输入 1 、 2 或 3")
 
 
 
-# 自动刮削
-AUTO = True
-print("自动刮削模式") if AUTO else print("手动刮削模式")
+#print("自动刮削模式") if AUTO else print("手动刮削模式")
 count = 1 if AUTO else 20
 results = []
 data = []
 # data = [{'folder':'9cda66af018b490b9afcb6f1ee91d78f','fileName':'螺丝钉 第三季'},
 # {'folder':'ecd2c07472704ff68e95b025347c813c','fileName':'平博士密码'}]
 
+
+# 替换为你的目标网址
+url = "https://gitee.com/if00/python/raw/master/png/scrape.png"
+
+try:
+    # 发送请求获取JSON
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()  # 抛出HTTP错误（如404、500）
+    
+    # 解析JSON并赋值给变量
+    scrape_data = response.json()
+    
+    # 保存到本地文件
+    with open("scrape.json", "w", encoding="utf-8") as f:
+        json.dump(scrape_data, f, ensure_ascii=False, indent=2)
+    
+    print("JSON获取并保存成功！")
+except requests.exceptions.RequestException as e:
+    print(f"请求失败：{e}")
+except json.JSONDecodeError:
+    print("解析JSON失败，目标网址返回内容非有效JSON")
+# 1. 读取同级目录下的scrape.json文件
+#file_path = "scrape.json"  # 同级目录直接写文件名
+#with open(file_path, "r", encoding="utf-8") as f:
+#    scrape_data = json.load(f)  # 加载为Python字典/列表
+
 if not data:
-    #datas = getFolder("65b3da4439d04e29b467dd507cfc01f5")
-    datas = getFolder("d4589f3a32874972a2f97622091e9888")
+    datas = getFolder("65b3da4439d04e29b467dd507cfc01f5")
+   # datas = getFolder("207994a523684ab180ae835970ac9164")
+
     # with open('results2.json', 'w', encoding='utf-8') as f:
     #     json.dump(datas, f, ensure_ascii=False, indent=4)
     tb = PrettyTable(["序号", "文件夹ID", "文件夹名"])
+    k=0
+    datas2=[]
     for i, data in enumerate(datas):
-        tb.add_row([str(i), data['folder'], data['fileName']])
+        sign = False
+        for j in scrape_data["scrape"]:
+            if data['folder']==j["folder"]:
+                sign = True
+                break
+        if sign == False:
+            tb.add_row([str(k), data['folder'], data['fileName']])
+            datas2.append(data)
+            k=k+1
     print(tb)
-    index = input("请选择需要刮削的文件夹序号（空格分隔）：")
-    if " " in index:
-        index = [int(i) for i in index.split(" ")]
+    if LIST:
+        data = datas2
     else:
-        index = [int(index)]
-    data = [datas[i] for i in index]
-    print("你选择的文件夹是：")
-    tb2 = PrettyTable(tb.field_names)
-    for i in index:
-        tb2.add_row(tb._rows[i])
-    print(tb2)
+        index = input("请选择需要刮削的文件夹序号（空格分隔）：")
+        if " " in index:
+            index = [int(i) for i in index.split(" ")]
+        else:
+            index = [int(index)]
+        data = [datas2[i] for i in index]
+        print("你选择的文件夹是：")
+        tb2 = PrettyTable(tb.field_names)
+        for i in index:
+            tb2.add_row(tb._rows[i])
+        print(tb2)
 
 for row in data:
     result = {}
     result['folder'] = row['folder']
     result['fileName'] = row['fileName']
-    file_name = row['fileName']
-    mid = scrapeMovieId(file_name)
-    vod_list = getScrapeInfos(mid)
-    sleep(0.1)  # 等待100毫秒，避免请求过于频繁
-    if vod_list:
-        result['imgurl'] = str(vod_list)
+    result['imgurl'] = ""
+    file_name = row['fileName'].split("：")[-1]
+    print(file_name)
+    if LIST:
+        mid =False
+    else:
+        mid = scrapeMovieId(file_name)
+        sleep(0.1)
+    if mid:
+        vod_list = getScrapeInfos(mid)
+        sleep(0.1)  # 等待100毫秒，避免请求过于频繁
+        if vod_list:
+            result['imgurl'] = str(vod_list)
+    elif mid=='':
+        print("未找到匹配的刮削信息")
     results.append(result)
+    
+with open('results1.json', 'w', encoding='utf-8') as f:
+    json.dump(results, f, ensure_ascii=False, indent=0)
 
-
-
-with open('results.json', 'w', encoding='utf-8') as f:
-    json.dump(results, f, ensure_ascii=False, indent=4)
-
-if __name__ == "__main__":
-    run_code = 0
+# 3. 覆盖原文件保存（确保原文件备份，避免数据丢失）
+#with open(file_path, "w", encoding="utf-8") as f:
+#    json.dump(scrape_data,f,ensure_ascii=False,indent=0)
