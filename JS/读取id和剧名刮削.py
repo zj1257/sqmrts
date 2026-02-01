@@ -138,7 +138,7 @@ def getScrapeInfos(item):
         countries += f"{country}|"
     countries = countries.strip('|')
     vodList = {"pic": pic, "year": year, 'title': title, "remark": remark, 'content': content, 'actors': actors, 'directors': directors, 'countries': countries}
-    print(vodList)
+    #print(vodList)
     return vodList
 
 # 选择菜单
@@ -181,7 +181,7 @@ data = []
 
 
 # 替换为你的目标网址
-url = "https://gitee.com/if00/python/raw/master/png/scrape.png"
+url = "https://16158.kstore.space/scrape.json"
 
 try:
     # 发送请求获取JSON
@@ -206,7 +206,9 @@ except json.JSONDecodeError:
 #    scrape_data = json.load(f)  # 加载为Python字典/列表
 
 if not data:
-    datas = getFolder("65b3da4439d04e29b467dd507cfc01f5")
+    datas = getFolder("d4589f3a32874972a2f97622091e9888")
+#来自分享d4589f3a32874972a2f97622091e9888
+#安安专属65b3da4439d04e29b467dd507cfc01f5
    # datas = getFolder("207994a523684ab180ae835970ac9164")
 
     # with open('results2.json', 'w', encoding='utf-8') as f:
@@ -260,8 +262,8 @@ for row in data:
     elif mid=='':
         print("未找到匹配的刮削信息")
     results.append(result)
-    
-with open('results1.json', 'w', encoding='utf-8') as f:
+print(json.dumps(results, ensure_ascii=False, indent=0))
+with open('./results0.json', 'w', encoding='utf-8') as f:
     json.dump(results, f, ensure_ascii=False, indent=0)
 
 # 3. 覆盖原文件保存（确保原文件备份，避免数据丢失）
