@@ -45,17 +45,14 @@ class Spider(Spider):
             self.scrape_json = json.loads(scrape_str)
         except:
             self.scrape_json = {"scrape": []}
-        try:
-            self.type_name = extendDict['name']+"专属"
-        except:
-            self.type_name = "安安专属"
+       
         try:
             self.classname = extendDict['folders']
         except:
             self.classname = []
         try:
             self.is_vip = self.get_vip()
-            print("是否VIP：", self.is_vip)
+            self.log("是否VIP：", self.is_vip)
         except:
             pass
         newcookies = requests.utils.dict_from_cookiejar(self.s.cookies)
@@ -77,7 +74,10 @@ class Spider(Spider):
             cookies_str = extendDict['bili_cookie']
             if type(cookies_str) == str and cookies_str.startswith('http'):
                 cookies_str = self.fetch(cookies_str, timeout=10).text.strip()
-            cookies_dict = dict([l.split("=", 1) for l in cookies_str.split("; ")])
+            try:
+                cookies_dict = dict([l.split("=", 1) for l in cookies_str.split("; ")])
+            except:
+                cookies_dict ={}
             if cookies_dict:
                 cookies = requests.utils.cookiejar_from_dict(cookies_dict)
                 self.b.cookies.update(cookies)
@@ -117,13 +117,12 @@ class Spider(Spider):
         r = self.s.get('https://pan.quark.cn/account/info', timeout=10).json()
         if r['data']:
             nickname = r['data']['nickname']
-            print(nickname)
+            # print(nickname)
             #fname = [self.type_name, self.fid]
         else:
             fname = ["登录失败！请正确配置夸克Cookie。","error"]
-        result['class'] = [{"type_name": self.type_name, "type_id": "65b3da4439d04e29b467dd507cfc01f5", "type_flag": "1"}]
-        if self.b.cookies:
-            result['class'].append({"type_name": "B站收藏", "type_id": "fav&&&1722080014", "type_flag": "1"})
+        result['class'] = []
+        
         for i in self.classname:
             result['class'].append({"type_name": i["name"], "type_id": i["fid"], "type_flag": "1"})
         self.log(result)
@@ -205,12 +204,13 @@ class Spider(Spider):
             result['total'] = lenvideos
             return result
         # 以上为对B站收藏夹的处理
-        self.log(tid)
+
         pName = None
         if "folder" in tid:
             fid = json.loads(tid)
             tid = fid['folder']
             pName = fid['fileName']
+        self.log(tid)
         params = {"shareId":"","folder":"","parentId":"","fileType":"","fileName":""}
         if tid == "error":
             return result
@@ -231,19 +231,17 @@ class Spider(Spider):
                 params['fileType'] = "folder"
                 params['fileName'] = vod['file_name']
                 scrapeInfo = self.getscrape(vod["fid"])
+                vod_pic = scrapeInfo["pic"] if scrapeInfo.get("pic") else img
                 videos.append({
                     "vod_id": json.dumps(params, ensure_ascii=False),
                     "vod_name": vod['file_name'],
-                    "vod_pic": scrapeInfo["pic"] if scrapeInfo.get("pic") else img,
+                    "vod_pic": vod_pic,
                     "vod_tag": "folder",
-                    "style": {
-                        "type": "rect",
-                        "ratio": 0.75
-                    },
+                    "style": {"type": "list"} if vod_pic==""  else  {"type": "rect","ratio": 0.75} ,
                     "vod_remarks": "文件夹"
                 })
             else:
-                if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.dff']:
+                if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.m4a', '.dff']:
                     size = self.getSize(vod['size'])
                     videoList.append({'fid': vod["fid"], 'pdir_fid':vod["pdir_fid"],'fileName': vod['file_name'], "img": img, "remark": size})
                 # elif splitext(vod['file_name'])[1] in ['.ass', '.ssa', '.srt']:
@@ -275,6 +273,7 @@ class Spider(Spider):
 
 
     def detailContent(self, did):
+        self.log(did)
         if 'folder' in did[0]:
             params = json.loads(did[0])
             result = {}
@@ -284,7 +283,7 @@ class Spider(Spider):
                 pass
             elif fileType == 'file':
                 tid = params['parentId']
-                print(tid)
+                # print(tid)
                 # 暂缓处理第二页内容
                 pg = 1
                 vodList = []
@@ -300,7 +299,7 @@ class Spider(Spider):
                 videoList = []
                 for vod in vodList:
                     if not vod['dir']:
-                        if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.dff']:
+                        if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.m4a', '.dff']:
                             videoList.append({'fid': vod["fid"],'fileName': vod['file_name'].rsplit('.', 1)[0]})
                 vod_play_url = '#'.join(f"{i['fileName']}${i['fid']}" for i in videoList)
                 # 获取播放源列表
@@ -366,7 +365,25 @@ class Spider(Spider):
             return result
 
     def searchContent(self, key, quick, pg="1"):
-        pass
+        params = {"shareId":"","folder":"","parentId":"","fileType":"file","fileName":""}
+        videos = []
+        r = self.s.get(f'https://drive-pc.quark.cn/1/clouddrive/file/search?pr=ucpro&fr=pc&uc_param_str=&q={key}&_page={pg}&_size=50&_fetch_total=1&_sort=file_type:desc,updated_at:desc&_is_hl=1', headers={'Referer': 'https://pan.quark.cn/', 'Host': 'drive-pc.quark.cn', 'Connection': 'Keep-Alive'},timeout=10)
+        data = r.json()
+        vodList = data["data"]["list"]
+        for vod in vodList:
+            scrapeInfo = self.getscrape(vod["fid"])
+            params["folder"] = vod['fid']
+            params["parentId"] = vod['pdir_fid']
+            params["fileName"] = vod['file_name']
+            videos.append({
+                'vod_tag': "folder" if int(vod['file_type']) == 0 else "file",
+                'vod_id': json.dumps(params, ensure_ascii=False),
+                'vod_name': params["fileName"],
+                'vod_pic': scrapeInfo["pic"] if scrapeInfo.get("pic") else self.vodPic,
+                'vod_year': "",
+                'vod_remarks': "我的夸克"
+            })
+        return {'list': videos,'page': pg}
 
     def playerContent(self, flag, file_id, vipFlags):
         if flag == 'B站视频':
@@ -402,16 +419,23 @@ class Spider(Spider):
         if "原画" in flag:
             play_url = self.get_download(file_id)
         else:
-            play_url = self.get_live_transcoding(file_id, flag)
+            play_url = self.get_live_transcoding(file_id)
         if not play_url:
             return {"parse": 0, "playUrl": "", "url": ""}
         header = self.s.headers
         header['Cookie'] = self.cookie
         header["Referer"] = "https://pan.quark.cn/"
-        if ".m3u8" in play_url:
-            return self.get_m3u8(play_url, header)
-        go_url = self.go_proxy_video(play_url, header)
-        return {'parse': 0, 'url': go_url, 'header': header}
+        # 新增：play_url为列表时，处理所有偶数位url
+        if isinstance(play_url, list):
+            for i in range(1, len(play_url), 2):
+                url_item = play_url[i]
+                if isinstance(url_item, str) and url_item and ".m3u8" not in url_item:
+                    play_url[i]=self.go_proxy_video(url_item, header)
+            return {'parse': 0, 'url': play_url, 'header': header}
+        if ".m3u8" not in play_url:
+            play_url = self.go_proxy_video(play_url, header)
+        #[{'url': 'http://127.0.0.1:9978/proxy?do=py&format=application/x-subrip&type=sub&url=https://16158.kstore.space/subtitle.srt', 'name': '测试', 'format': 'application/x-subrip'}]
+        return {'parse': 0, 'url': play_url, 'header': header,'subs':[]}
         
 
     def get_download(self, file_id):
@@ -423,7 +447,7 @@ class Spider(Spider):
             return json_data["data"][0]["download_url"]
         return None
 
-    def get_live_transcoding(self, file_id,  flag):
+    def get_live_transcoding(self, file_id):
         """ 获取实时转码地址 """
         data = {
             "fid": file_id,
@@ -432,10 +456,17 @@ class Spider(Spider):
         }
         r = self.s.post(f"https://drive-pc.quark.cn/1/clouddrive/file/v2/play?pr=ucpro&fr=pc", json=data, timeout=10)
         json_data = r.json()
+        print(json_data)
+        urls = []
         if json_data["data"] and json_data["data"]["video_list"]:
             for video in json_data["data"]["video_list"]:
-                if video["resolution"] == json_data["data"]["default_resolution"]:
-                    return video["video_info"]["url"]
+                urls.append(video["resolution"])
+                urls.append(video["video_info"]["url"])
+                # if video["resolution"] == json_data["data"]["default_resolution"]:
+            # if len(urls) < 3: 
+            #     return urls[1]
+            # else:
+            return urls
         return None
 
     def localProxy(self, params):
@@ -450,6 +481,11 @@ class Spider(Spider):
             return self.proxyMpd(params)
         if params['type'] == "media":
             return self.proxyMedia(params)
+        if params['type'] == "sub":
+            url = params["url"]
+            header = {}
+            header["Location"] = url
+            return [302, format, None, header]
         return None
 
     def go_proxy_video(self, url,header):
@@ -459,35 +495,6 @@ class Spider(Spider):
         downloadUrl = f'http://127.0.0.1:7777?url={quote(url)}&thread={self.thread}'
         return downloadUrl
 
-    def get_m3u8(self, url, header):
-        """ M3U8 代理处理 """
-        r = self.s.get(url, headers=header, timeout=10)
-        m3u8_arr = r.text.split("\n")
-        list_m3u8 = []
-        site = url.rsplit("/", 1)[0] + "/"
-        media_id = 0
-
-        for one_line in m3u8_arr:
-            this_one = one_line
-            if ".ts" in one_line:
-                """ 构造代理视频 URL """
-                video_url = site + this_one
-                encoded_url = self.e64(video_url)
-                encoded_header = self.e64(json.dumps(header))
-                this_one = f"{self.getProxyUrl()}&type=video&url={encoded_url}&header={encoded_header}"
-                media_id += 1
-            list_m3u8.append(this_one)
-        m3u8_str = "\n".join(list_m3u8)
-        content_type = r.headers["Content-Type"]
-        return [r.status_code, content_type, io.BytesIO(m3u8_str.encode("utf-8")), r.headers]
-
-    def get_play_format_list(self):
-        """ 获取支持的播放格式列表 """
-        return ["4K", "超清", "高清", "普画"] if self.is_vip else ["普画"]
-
-    def get_play_format_quark_list(self):
-        """ 获取夸克内部播放格式列表 """
-        return ["4k", "2k", "super", "high", "normal", "low"] if self.is_vip else ["low"]
     def getSize(self, size):
         if size > 1024 * 1024 * 1024 * 1024.0:
             fs = "TB"
@@ -674,4 +681,4 @@ class Spider(Spider):
         from re import sub, compile
         clean = compile('<.*?>')
         return sub(clean, '', src)
-
+        # ec5221a038f64835a89cc179618f43b0
