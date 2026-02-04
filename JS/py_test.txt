@@ -1,16 +1,24 @@
 http://127.0.0.1:9978/file/Documents/Pydroid3/aowu/scrape.json
+
+
+
+
+
+
 if __name__ == "__main__":
     sp = Spider()
     # sp.init("ctoken=kHzp5NhLX0b0xm6Q755wapjl;__uid=AARU7wIFft+ykEyp6z8cXwiv;__pus=d8c85f3e462f22fb6d2d03fedaed5e94AASZd0M0+1ZUj4dPRVAEI9RrrBYum8OV9uqqeunnAZ0buxrLv03ARch6GP1GqFk84g4emAvMSX9ZsYk7UDMNzbBt;__kp=8f798390-2a49-11f0-b464-eb278a7a3e14;__kps=AARU7wIFft+ykEyp6z8cXwiv;__ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==;__uid=AARU7wIFft+ykEyp6z8cXwiv;__puus=02bcbfefaf2520deb3781bd665be7099AAS2Y5Jg3x98dIfZtjpR2VA7llfOVoGwXCMjqbTrjQnxXrcXiiEonthDogX6SKYM+ZTmtAlHKpwYWsTBrSOu96WlsaUNxFbmAXZzQoPz2yMNV5qAc5NRCNnmIE1LUhSTrgVA33wDcAcGua17kg5MMrb9SQCSBbc003GptrPKtcMTH+i5BX6w199VvsAKfkB7NynjwJi3SApzEnu7TgXF95DW") # 初始化
-    sp.init('{"cookie":"ctoken=kHzp5NhLX0b0xm6Q755wapjl;__uid=AARU7wIFft+ykEyp6z8cXwiv;__pus=47672057ebb821d450db8920606d40fbAASWI0usXzpk02qWpn+6gxN/qQKQeDx51OEh4kED/Z6u0MX/bbBrPUWiafkXAnCjOM7242/JLDEclot0KOv4rcWZ;__kp=c4317bd0-bd2d-11ef-8772-5db17be97bc8;__kps=AARU7wIFft+ykEyp6z8cXwiv;__ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==;__puus=6098b03cffe113671cacb55fee50cef2AAS2Y5Jg3x98dIfZtjpR2VA7M8yxQiXSlpjI5PeqVAPL+2lnZeKfhAKczjqPn6lLGML5QccwwjhflHKgm8t19ZDwT7TPGJC5Hjwl9nRLQjS5foWEdE/lMKYl54I422D4y7GPimY3k9FCEJfBkmHn2CzehPOkPnTvHWuFJiUClE1ZQVXpwd4hL9sxKTjEOB+Ezb050SqPmKet+ebWxz9XJYKP","fid":"65b3da4439d04e29b467dd507cfc01f5"}') # 初始化
+    sp.init({"cookie": "ctoken=npnC1oqZWWEXIwoeS9KlbM0i;b-user-id=582bd5d8-437f-b391-111a-4a1223574726;grey-id=4598be75-34c9-7ab0-a8a6-5cf6f97d71a5;grey-id.sig=_9dJ-Mnel-rHI64VwBH4A7UmiwQB-tfuZYoKyKFBDdg;isQuark=true;isQuark.sig=hUgqObykqFom5Y09bll94T1sS9abT1X-4Df_lzgl8nM;__wpkreporterwid_=755685c9-5f55-4a85-16d2-5ae412781ee5;_UP_A4A_11_=wb9cc1fec77a4868bc0dfd51f406597a;tfstk=gdYjeTwNxs-r0NKdcNlzRQaebD72lbuEG519tCU46ZQYWdOGUsrqmGk6VdpPHEoc3L66TC4N3I7x1d9phGJ6sjfOBdp1Qnor8IAcSNHeC2ueir9IY89fXGe-615YHbSAj7bJ0NHEL4umljj1WdrIzGJWwTf1MPI9B7h51s_TkGUY28Bl6NQODrF8y6CYB1CADbORE1QOBdQtNaBl6NB9BNdUkf5oX9AjOUiYjYFMoIB7WPLjRZBBwlzYkU1fnQdAFiS2PssfLGhcZnY9OCLVPHwt5TLDgULPcz0NeHOOl_j01P_9gTvC3dIy5yWCWqr_jtUON9lSNlqiW11iP9rLb-jAZ_-jNbZw3iClN9lSNlqGD_f8SbG7bK5..;_UP_30C_6A_=st9cc6201318cqglt3sp1g8fbcj2pb42;_UP_TS_=sg1222464072d5f810b2b10b4b969a7a5b6;_UP_E37_B7_=sg1222464072d5f810b2b10b4b969a7a5b6;_UP_TG_=st9cc6201318cqglt3sp1g8fbcj2pb42;_UP_335_2B_=1;web-grey-id=70a92f0b-349c-7700-6c2f-8adf211cb121;web-grey-id.sig=t3jsYfI-WdMKo-3F6u4ZldLwP8s6bWU6L4-Ff-_6UiE;_UP_F7E_8D_=OU7RkS5Fl8A9gnc6RbALei%2BS4e%2Bd2%2FtMIo24ZtjGgRKNIB1CG15A66RrCtBD8PdCNDmKM9hL89VD8CizlW8ST3INEc0DyOipgbVemTID4d%2FJfd6YLm4Bw0KoWmdkn3NKr%2FkWp7W34NZlhgFKUTD%2BEalz%2B%2FFr7vwn75FlhnOTYQk1e9bRjiBoAwUd%2Fruv44%2BOFsnw8Onwrv256e3Rn7QPiHY5ITnJa4IqamAG646kaPWLlBPf7OXKwxJ9tXWSwXlf9qCMVYnUSskblhLlvZ%2FRt9Dgw4iVwBb5ZbWvStzm6aYlNVWbuA7cEaAINyd%2BnUvWo9ZvT9tODUHTX%2BTcqN5XbcOk1ra3INMiXbnEFWx%2Fk%2BcjOk0NMklkPPJhcjIY9laLkPvhSjPtLS9YIGPd1Sag%2FoLmdhpsOV%2F1VxufgE6%2FXhCsSL5OwizVU2TxvjF8lUdBo8aG5K1wGd3iDExO0cma7g%3D%3D;_UP_D_=pc;__pus=074d61c61c145516f189d6bda017cdebAASeSCqZDKBvInWIai5sYLvuoyc+gvBBTa8RS3Fh8DWE5b1MbOAdJBgCe8a0ZvZOvMkOmcUo47ip9TQ89q9fvYAX;__kp=979e0920-eb90-11f0-801e-a122018797d4;__kps=AARU7wIFft+ykEyp6z8cXwiv;__ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==;__uid=AARU7wIFft+ykEyp6z8cXwiv;__puus=132a89d793c6e8b7d5369e01108af5abAAS2Y5Jg3x98dIfZtjpR2VA7JjYCm4NVOk/8k7Luj1/X439JG77uzzuPWvXEvahS6YfyRLrhAwcbD0K9u3yAaHxcUhxpxU/t5lUqkCYWokKDIilohx/+VsperZ4YVPQWuG8H/4OcsBPz1WypEDy+sOn9X5Qw0U413TmTB5A4HbQctbgT2XAGuaZYXFwxFi7pKiohBQ5Cr4JUeWlsiFdR3b+R", "scrape": "https://gitee.com/if00/python/raw/master/png/scrape.png", "folders": [{"name": "健身", "fid": "cc3761c593aa49088d087f8fe29be3ae"},
+{"name": "影视", "fid": "360901f97f734fc685af32db3ad3e6e6"},{"name": "Arduino", "fid": "ec5221a038f64835a89cc179618f43b0"}]}) # 初始化
     formatJo = sp.homeContent(False) # 筛选分类(首页 可选)
     # formatJo = sp.homeVideoContent() # (首页 可选)
-    # formatJo = sp.searchContent("斗罗",False,'1') # 搜索
-    # formatJo = sp.categoryContent('65b3da4439d04e29b467dd507cfc01f5', '1', False, {}) # 分类
-    # formatJo = sp.detailContent(['{"shareId": "", "folder": "f9ca0352d2254e6abd008acd8ba34e0a", "parentId": "9f06fde848764071ae57ebff93088cfa", "fileType": "file","fileName":"测试"}']) # 详情
-    formatJo = sp.playerContent("夸克原画","ef16155c06494ef8a0df4229daa1aaaf",{}) # 播放
+    # formatJo = sp.searchContent("螺丝钉 第五季",False,'1') # 搜索
+    # formatJo = sp.categoryContent('ec5221a038f64835a89cc179618f43b0', '1', False, {}) # 分类
+    # formatJo = sp.detailContent(['{"shareId": "", "folder": "b0b3deb0054c4d3aa5820f82cff28259", "parentId": "ec5221a038f64835a89cc179618f43b0", "fileType": "file","fileName":"测试"}']) # 详情
+    formatJo = sp.playerContent("夸克原画","b0b3deb0054c4d3aa5820f82cff28259",{}) # 播放
     # formatJo = sp.localProxy({"":""}) # 代理
     print(formatJo)
+
 
 
 curl -X GET -H "cookie:ctoken=kHzp5NhLX0b0xm6Q755wapjl;__uid=AARU7wIFft+ykEyp6z8cXwiv;__puus=a3de986c326deceb5a51b4fff3ced31eAAS2Y5Jg3x98dIfZtjpR2VA7nsiM/8l+x27HFGCFTPMXzFal8CiG3gg0J4jngYZ5Qgs97dTBee8mVBdlK3eV3oReLFFHIr4tXKdIqLaKP4mKRLS35NTFYRumSr1xDvsVoOq5PseRD0gHHHUHqL9ebtiY5lmy6+STHnuTObK762SxF4+ce03G/72F4WfWa9hzzZ5TS+q1PuF89JHUnt790Qmd;__pus=47672057ebb821d450db8920606d40fbAASWI0usXzpk02qWpn+6gxN/qQKQeDx51OEh4kED/Z6u0MX/bbBrPUWiafkXAnCjOM7242/JLDEclot0KOv4rcWZ;__kp=c4317bd0-bd2d-11ef-8772-5db17be97bc8;__kps=AARU7wIFft+ykEyp6z8cXwiv;__ktd=h0g2aJQ0Q9XyVWV9BVhQnQ==" -H "Referer:https://pan.quark.cn/" -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) quark-cloud-drive/3.0.1 Chrome/100.0.4896.160 Electron/18.3.5.12-a038f7b798 Safari/537.36 Channel/pckk_other_ch" -H "Host:drive-pc.quark.cn" -H "Connection:Keep-Alive" -H "Accept-Encoding:gzip" "https://drive-pc.quark.cn/1/clouddrive/config?pr=ucpro&fr=pc&uc_param_str="

@@ -63,25 +63,7 @@ class Spider(Spider):
         if 'thread' in extendDict:
             self.thread = str(extendDict['thread'])
         else:
-            self.thread = '10'
-        # 下面为B站视频处理
-        self.b = requests.Session()
-        self.b.headers = {
-            "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36",
-            "Referer": "https://www.bilibili.com"
-        }
-        if 'bili_cookie' in extendDict:
-            cookies_str = extendDict['bili_cookie']
-            if type(cookies_str) == str and cookies_str.startswith('http'):
-                cookies_str = self.fetch(cookies_str, timeout=10).text.strip()
-            try:
-                cookies_dict = dict([l.split("=", 1) for l in cookies_str.split("; ")])
-            except:
-                cookies_dict ={}
-            if cookies_dict:
-                cookies = requests.utils.cookiejar_from_dict(cookies_dict)
-                self.b.cookies.update(cookies)
-        
+            self.thread = '10' 
 
     def getscrape(self, fid):
         for i in self.scrape_json["scrape"]:
@@ -114,97 +96,26 @@ class Spider(Spider):
     def homeContent(self, filter):
         result = {}
         result['filters'] = {}
+        result['class'] = []
         r = self.s.get('https://pan.quark.cn/account/info', timeout=10).json()
         if r['data']:
             nickname = r['data']['nickname']
-            # print(nickname)
+            self.log(nickname)
             #fname = [self.type_name, self.fid]
+            for i in self.classname:
+                result['class'].append({"type_name": i["name"], "type_id": i["fid"], "type_flag": "1"})
+            self.log(result)
+            self.idList = {i["type_id"]:i["type_name"] for i in result['class']}
         else:
-            fname = ["登录失败！请正确配置夸克Cookie。","error"]
-        result['class'] = []
-        
-        for i in self.classname:
-            result['class'].append({"type_name": i["name"], "type_id": i["fid"], "type_flag": "1"})
-        self.log(result)
-        self.fid_name={i["type_id"]:i["type_name"] for i in result['class']}
+            result['class'] = [{"type_name": "无效cookie", "type_id": "error", "type_flag": "1"}]
         return result
 
     def homeVideoContent(self):
         pass
 
     def categoryContent(self, tid, pg, filter, extend):
-        page = int(pg)
         result = {}
         videos = []
-        pagecount = page
-        if tid == "收藏夹":
-            userid = self.getUserid()
-            if userid is None:
-                return {}, 1
-            url = f'http://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid={userid}&jsonp=jsonp'
-            r = self.b.get(url, timeout=5)
-            data = json.loads(self.cleanText(r.text))
-            vodList = data['data']['list']
-            pagecount = page
-            for vod in vodList:
-                vid = vod['id']
-                title = vod['title'].strip()
-                remark = vod['media_count']
-                img = 'https://api-lmteam.koyeb.app/files/shoucang.png'
-                videos.append({
-                    "vod_id": f'fav&&&{vid}',
-                    "vod_name": title,
-                    "vod_pic": img,
-                    "vod_tag": 'folder',
-                    "style": {
-                        "type": "rect",
-                        "ratio": 0.75
-                    },
-                    "vod_remarks": remark
-                })
-            lenvideos = len(videos)
-            result['list'] = videos
-            result['page'] = page
-            result['pagecount'] = pagecount
-            result['limit'] = lenvideos
-            result['total'] = lenvideos
-            return result
-        elif tid.startswith('fav&&&'):
-            tid = tid[6:]
-            url = f'http://api.bilibili.com/x/v3/fav/resource/list?media_id={tid}&pn={page}&ps=20&platform=web&type=0'
-            r = self.b.get(url, timeout=5)
-            data = json.loads(self.cleanText(r.text))
-            if data['data']['has_more']:
-                pagecount = page + 1
-            else:
-                pagecount = page
-            vodList = data['data']['medias']
-            for vod in vodList:
-                vid = str(vod['id']).strip()
-                title = self.removeHtmlTags(vod['title']).replace("&quot;", '"')
-                img = vod['cover'].strip()
-                remark = time.strftime('%H:%M:%S', time.gmtime(vod['duration']))
-                if remark.startswith('00:'):
-                    remark = remark[3:]
-                videos.append({
-                    "vod_id": vid,
-                    "vod_name": title,
-                    "vod_pic": img,
-                    "style": {
-                        "type": "rect",
-                        "ratio": 0.75
-                    },
-                    "vod_remarks": remark
-                })
-            lenvideos = len(videos)
-            result['list'] = videos
-            result['page'] = page
-            result['pagecount'] = pagecount
-            result['limit'] = lenvideos
-            result['total'] = lenvideos
-            return result
-        # 以上为对B站收藏夹的处理
-
         pName = None
         if "folder" in tid:
             fid = json.loads(tid)
@@ -214,44 +125,36 @@ class Spider(Spider):
         params = {"shareId":"","folder":"","parentId":"","fileType":"","fileName":""}
         if tid == "error":
             return result
-        r = self.s.get(f'https://drive-pc.quark.cn/1/clouddrive/file/sort?pr=ucpro&fr=pc&uc_param_str=&pdir_fid={tid}&_page={pg}&_size=100&_fetch_total=1&_fetch_sub_dirs=0&_sort=file_type:asc,file_name:asc', headers=self.headers_host,timeout=10)
-        data = r.json()
-        vodList = data["data"]['list']
-        videoList = []
-        for vod in vodList:
-            try:
-                if vod['big_thumbnail'].startswith('http'):
-                    imgUrl = vod['big_thumbnail']
-                    img = f'{self.getProxyUrl()}&type=image&url={quote(imgUrl)}'
-            except:
-                img = self.vodPic
-            if vod['dir']:
-                params['folder'] = vod["fid"]
-                params['parentId'] = vod["pdir_fid"]
+        # r = self.s.get(f'https://drive-pc.quark.cn/1/clouddrive/file/sort?pr=ucpro&fr=pc&uc_param_str=&pdir_fid={tid}&_page={pg}&_size=100&_fetch_total=1&_fetch_sub_dirs=0&_sort=file_type:asc,file_name:asc', headers=self.headers_host,timeout=10)
+        # data = r.json()
+        # vodList = data["data"]['list']page = 1
+
+        folderList,videoList,subtList = self.getAllFile(tid)
+        if folderList != []:
+            for folder in folderList:
+                params['folder'] = folder["fid"]
+                params['parentId'] = folder["pdir_fid"]
                 params['fileType'] = "folder"
-                params['fileName'] = vod['file_name']
-                scrapeInfo = self.getscrape(vod["fid"])
-                vod_pic = scrapeInfo["pic"] if scrapeInfo.get("pic") else img
+                params['fileName'] = folder['fileName']
+                scrapeInfo = self.getscrape(folder["fid"])
+                vod_pic = scrapeInfo["pic"] if scrapeInfo.get("pic") else folder['img']
                 videos.append({
                     "vod_id": json.dumps(params, ensure_ascii=False),
-                    "vod_name": vod['file_name'],
+                    "vod_name": folder['fileName'],
                     "vod_pic": vod_pic,
                     "vod_tag": "folder",
                     "style": {"type": "list"} if vod_pic==""  else  {"type": "rect","ratio": 0.75} ,
                     "vod_remarks": "文件夹"
                 })
-            else:
-                if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.m4a', '.dff']:
-                    size = self.getSize(vod['size'])
-                    videoList.append({'fid': vod["fid"], 'pdir_fid':vod["pdir_fid"],'fileName': vod['file_name'], "img": img, "remark": size})
-                # elif splitext(vod['file_name'])[1] in ['.ass', '.ssa', '.srt']:
-                # 	subtList.append(vod['file_name'])
+
         if videoList != []:
+            self.setCache(f"quarkPlayList_{params['parentId']}", videoList)
+            self.setCache('quarkSubtList', subtList)
             for video in videoList:
                 params['folder'] = video["fid"]
                 params['parentId'] = video["pdir_fid"]
                 params['fileType'] = "file"
-                params['fileName'] = self.fid_name[tid] if pName is None else pName
+                params['fileName'] = self.idList[tid] if pName is None else pName
                 videos.append({
                     "vod_id": json.dumps(params, ensure_ascii=False),
                     "vod_name": video['fileName'],
@@ -263,105 +166,81 @@ class Spider(Spider):
                     },
                     "vod_remarks": video['remark']
                 })
-
-        result['list'] = videos
-        result['page'] = data['metadata']['_page']
-        result['pagecount'] = -1 * (-data['metadata']['_total'] // 100)
-        result['limit'] = 100
-        result['total'] = data['metadata']['_total']
+        result = {
+            'list': videos,
+            'page': pg,
+            'pagecount': 1,  # 设置一个较大的值
+            'limit': 80,
+            'total': 999999
+        }
+        # result['page'] = data['metadata']['_page']
+        # result['pagecount'] = -1 * (-data['metadata']['_total'] // 100)
+        # result['limit'] = 100
+        # result['total'] = data['metadata']['_total']
         return result
 
 
     def detailContent(self, did):
         self.log(did)
-        if 'folder' in did[0]:
-            params = json.loads(did[0])
-            result = {}
-            pName = params['fileName'].split("：")[-1]
-            fileType = params['fileType']
-            if fileType == 'playList':
-                pass
-            elif fileType == 'file':
-                tid = params['parentId']
-                # print(tid)
-                # 暂缓处理第二页内容
-                pg = 1
-                vodList = []
-                while True:
-                    r = self.s.get(f'https://drive-pc.quark.cn/1/clouddrive/file/sort?pr=ucpro&fr=pc&uc_param_str=&pdir_fid={tid}&_page={pg}&_size=100&_fetch_total=1&_fetch_sub_dirs=0&_sort=file_type:asc,file_name:asc', headers={'Referer': 'https://pan.quark.cn/', 'Host': 'drive-pc.quark.cn', 'Connection': 'Keep-Alive'},timeout=10)
-                    data = r.json()
-                    self.log(str(data))
-                    time.sleep(0.05)
-                    vodList += data["data"]['list']
-                    pg += 1
-                    if pg > -1 * (-data['metadata']['_total'] // 100):
-                        break
-                videoList = []
-                for vod in vodList:
-                    if not vod['dir']:
-                        if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.m4a', '.dff']:
-                            videoList.append({'fid': vod["fid"],'fileName': vod['file_name'].rsplit('.', 1)[0]})
-                vod_play_url = '#'.join(f"{i['fileName']}${i['fid']}" for i in videoList)
-                # 获取播放源列表
-                play_from_tmp = ["夸克原画","夸克预览"]
-                play_url = []
-                # 使播放链接与播放源数量对应
-                for _ in play_from_tmp:
-                    play_url.append(vod_play_url)
-                scrapeInfo = self.getscrape(params['parentId'])
-                video = [{
-                "vod_id": params['folder'],#文件id
-                "vod_name": pName,#上层文件夹名字
-                "vod_pic": scrapeInfo["pic"] if scrapeInfo.get("pic") else self.vodPic,#上层文件夹图片
-                "type_name": "夸克云盘",
-                "vod_year": scrapeInfo["year"] if scrapeInfo.get("year") else "",
-                "vod_area": scrapeInfo["countries"] if scrapeInfo.get("countries") else "",
-                "vod_remarks": scrapeInfo["remark"] if scrapeInfo.get("remark") else "",
-                "vod_actor": scrapeInfo["actors"] if scrapeInfo.get("actors") else "",
-                "vod_director": scrapeInfo["directors"] if scrapeInfo.get("directors") else "",
-                "vod_content": scrapeInfo["content"] if scrapeInfo.get("content") else "",
-                # 播放源 多个用$$$分隔
-                "vod_play_from": "$$$".join(play_from_tmp), 
-                # 播放列表 注意分隔符 分别是 多个源$$$分隔，源中的剧集用#分隔，剧集的名称和地址用$分隔
-                "vod_play_url": "$$$".join(play_url)
-                }]
-                result['list'] = video
-                return result
-        else:
-            aid = did[0]
-            url = f"https://api.bilibili.com/x/web-interface/view?aid={aid}"
-            r = self.b.get(url, timeout=10)
-            data = json.loads(self.cleanText(r.text))
-            if "staff" in data['data']:
-                director = ''
-                for staff in data['data']['staff']:
-                    director += staff['name']
-            else:
-                director = data['data']['owner']['name']
-            vod = {
-                "vod_id": aid,
-                "vod_name": self.removeHtmlTags(data['data']['title']),
-                "vod_pic": data['data']['pic'],
-                "type_name": data['data']['tname'],
-                "vod_year": datetime.fromtimestamp(data['data']['pubdate']).strftime('%Y-%m-%d %H:%M:%S'),
-                "vod_content": data['data']['desc'].replace('\xa0', ' ').replace('\n\n', '\n').strip(),
-                "vod_director": director
-            }
-            videoList = data['data']['pages']
-            playUrl = ''
+        params = json.loads(did[0])
+        result = {}
+        pName = params['fileName'].split("：")[-1]
+        fileType = params['fileType']
+        if fileType == 'file':
+            videoList = self.getCache(f"quarkPlayList_{params['parentId']}")
+            subtList = self.getCache(f"quarkSubtList") if self.getCache(f"quarkSubtList") else []
+            if not videoList:
+                # return {'list': [], "msg": "无可播放资源"}
+                folderList,videoList,subtList = self.getAllFile(params['parentId'])
+
+            # try:
+            #     videoList = sorted(fileList, key=lambda x: x['fileName'])
+            # except:
+            #     pass
+            
             for video in videoList:
-                remark = time.strftime('%H:%M:%S', time.gmtime(video['duration']))
-                name = self.removeHtmlTags(video['part']).strip().replace("#", "-").replace('$', '*')
-                if remark.startswith('00:'):
-                    remark = remark[3:]
-                playUrl = playUrl + f"[{remark}]/{name}${aid}_{video['cid']}#"
-            vod['vod_play_from'] = 'B站视频'
-            vod['vod_play_url'] = playUrl.strip('#')
-            result = {
-                'list': [
-                    vod
-                ]
-            }
+                subList = []
+                # self.log(f"文件名:{video['fileName']}")
+                for subt in subtList:
+                    subName = splitext(subt['fileName'])[0]
+                    # self.log(f"字幕名:{subName}")
+                    score = self.match_score(splitext(video['fileName'])[0], subName)
+                    # 过滤并排序
+                    if score[0] < 9:  # 只保留有效匹配
+                        subList.append(
+                            {"dis": score, "subName": subName, "subFormat": splitext(subt['fileName'])[1], 'fid': subt['fid']})
+                            # {"dis": 0, "subName": subName, "subFormat": splitext(sub['fileName'])[1], 'fid': sub['fid']})
+                try:
+                    subList = sorted(subList, key=lambda x: x['dis'][0]*10 + x['dis'][1])
+                except:
+                    pass
+                if subList:
+                    video['fid']=video['fid']+"@@@"+'+'.join(f"{i['fid']}" for i in subList)
+            vod_play_url = '#'.join(f"{i['fileName']}${i['fid']}" for i in videoList)
+            # 获取播放源列表
+            play_from_tmp = ["夸克原画","夸克预览"]
+            play_url = []
+            # 使播放链接与播放源数量对应
+            for _ in play_from_tmp:
+                play_url.append(vod_play_url)
+            scrapeInfo = self.getscrape(params['parentId'])
+            videos = [{
+            "vod_id": params['folder'],#文件id
+            "vod_name": pName,#上层文件夹名字
+            "vod_pic": scrapeInfo["pic"] if scrapeInfo.get("pic") else self.vodPic,#上层文件夹图片
+            "type_name": "夸克云盘",
+            "vod_year": scrapeInfo["year"] if scrapeInfo.get("year") else "",
+            "vod_area": scrapeInfo["countries"] if scrapeInfo.get("countries") else "",
+            "vod_remarks": scrapeInfo["remark"] if scrapeInfo.get("remark") else "",
+            "vod_actor": scrapeInfo["actors"] if scrapeInfo.get("actors") else "",
+            "vod_director": scrapeInfo["directors"] if scrapeInfo.get("directors") else "",
+            "vod_content": scrapeInfo["content"] if scrapeInfo.get("content") else "",
+            # 播放源 多个用$$$分隔
+            "vod_play_from": "$$$".join(play_from_tmp), 
+            # 播放列表 注意分隔符 分别是 多个源$$$分隔，源中的剧集用#分隔，剧集的名称和地址用$分隔
+            "vod_play_url": "$$$".join(play_url)
+            }]
+            result['list'] = videos
             return result
 
     def searchContent(self, key, quick, pg="1"):
@@ -385,41 +264,37 @@ class Spider(Spider):
             })
         return {'list': videos,'page': pg}
 
-    def playerContent(self, flag, file_id, vipFlags):
-        if flag == 'B站视频':
-            result = {}
-            pid = file_id
-            if pid.startswith('bvid&&&'):
-                url = "https://api.bilibili.com/x/web-interface/view?bvid={}".format(pid[7:])
-                r = self.b.get(url, timeout=10)
-                data = r.json()['data']
-                aid = data['aid']
-                cid = data['cid']
-            elif "_" in pid:
-                idList = pid.split("_")
-                aid = idList[0]
-                cid = idList[1]
-            url = 'https://api.bilibili.com/x/player/playurl?avid={}&cid={}&qn=120&fnval=4048&fnver=0&fourk=1'.format(aid, cid)
-            cookiesDict, _, _ = self.getCookie()
-            cookies = quote(json.dumps(cookiesDict))
-            result["parse"] = 0
-            result["playUrl"] = ''
-            result["url"] = f'http://127.0.0.1:9978/proxy?do=py&type=mpd&cookies={cookies}&url={quote(url)}&aid={aid}&cid={cid}&thread={self.thread}'
-            result["header"] = self.b.headers
-            result['danmaku'] = 'https://api.bilibili.com/x/v1/dm/list.so?oid={}'.format(cid)
-            result["format"] = 'application/dash+xml'
-            return result
-        if False:#'可可' in self.type_name:
-            proxy_url = f'http://127.0.0.1:9978/proxy?do=pan&site=quark&shareId=&fileId={file_id}&fileToken='
-            header = self.s.headers
-            header['Cookie'] = self.cookie
-            header["Referer"] = "https://pan.quark.cn/"
-            return {'parse': 0, 'url': proxy_url, 'header': header}
+    def playerContent(self, flag, file_id, vipFlags):     
+        result = {}
+        subs = []
+        videoid = file_id.split("@@@")[0]
+        subids=file_id.split("@@@")[1] if "@@@" in file_id else ""
+        subids = subids.split("+") if subids != "" else []
+        subtList = self.getCache(f"quarkSubtList") if self.getCache(f"quarkSubtList") else []
+        if subids:
+            for subt in subtList:
+                for subid in subids:
+                    if subt['fid'] == subid:
+                        subName = splitext(subt['fileName'])[0]
+                        subExt = splitext(subt['fileName'])[1]
+                        if subExt == '.srt':
+                            subFormat = 'application/x-subrip'
+                        elif subExt == '.ass':
+                            subFormat = 'application/x-subtitle-ass'
+                        elif subExt == '.ssa':
+                            subFormat = 'text/x-ssa'
+                        else:
+                            subFormat = 'text/plain'
+                        subUrl = f'http://127.0.0.1:9978/proxy?do=py&type=sub&format={subFormat}&subid={subid}'
+                        subs.append({'url': subUrl, 'name': subName, 'format': subFormat})
+                        #[{'url': 'http://127.0.0.1:9978/proxy?do=py&format=application/x-subrip&type=sub&url=https://16158.kstore.space/subtitle.srt', 'name': '测试', 'format': 'application/x-subrip'}]
+                    
+        
         play_url = ""
         if "原画" in flag:
-            play_url = self.get_download(file_id)
+            play_url = self.get_download(videoid)
         else:
-            play_url = self.get_live_transcoding(file_id)
+            play_url = self.get_live_transcoding(videoid)
         if not play_url:
             return {"parse": 0, "playUrl": "", "url": ""}
         header = self.s.headers
@@ -434,8 +309,12 @@ class Spider(Spider):
             return {'parse': 0, 'url': play_url, 'header': header}
         if ".m3u8" not in play_url:
             play_url = self.go_proxy_video(play_url, header)
-        #[{'url': 'http://127.0.0.1:9978/proxy?do=py&format=application/x-subrip&type=sub&url=https://16158.kstore.space/subtitle.srt', 'name': '测试', 'format': 'application/x-subrip'}]
-        return {'parse': 0, 'url': play_url, 'header': header,'subs':[]}
+        result["parse"] = 0
+        result["playUrl"] = ''
+        result["url"] = play_url
+        result["header"] = header
+        result["subs"] = subs
+        return result
         
 
     def get_download(self, file_id):
@@ -443,6 +322,7 @@ class Spider(Spider):
         data = {'fids': [file_id]}
         result = self.s.post("https://drive-pc.quark.cn/1/clouddrive/file/download?pr=ucpro&fr=pc&uc_param_str=", json=data, timeout=10)
         json_data = result.json()
+        self.log(json_data)
         if json_data.get("data"):
             return json_data["data"][0]["download_url"]
         return None
@@ -462,10 +342,6 @@ class Spider(Spider):
             for video in json_data["data"]["video_list"]:
                 urls.append(video["resolution"])
                 urls.append(video["video_info"]["url"])
-                # if video["resolution"] == json_data["data"]["default_resolution"]:
-            # if len(urls) < 3: 
-            #     return urls[1]
-            # else:
             return urls
         return None
 
@@ -476,21 +352,22 @@ class Spider(Spider):
             r = self.s.get(url)
             headers={}
             #headers['Location'] = r.headers['Location']
-            return [200, "image/webp", r.content, headers] # 302重定向到url
-        if params['type'] == "mpd":
-            return self.proxyMpd(params)
-        if params['type'] == "media":
-            return self.proxyMedia(params)
+            return [200, "image/webp", r.content, headers] 
         if params['type'] == "sub":
-            url = params["url"]
-            header = {}
+            subid = params["subid"]
+            format = params["format"]
+            url = self.get_download(subid)
+            header = self.s.headers
+            header['Cookie'] = self.cookie
+            header["Referer"] = "https://pan.quark.cn/"
             header["Location"] = url
-            return [302, format, None, header]
+            return [302, format, None, header] # 302重定向到url
         return None
 
     def go_proxy_video(self, url,header):
         """ go代理处理 """
         self.log(url)
+        # return url
         url = url.encode('utf-8')
         downloadUrl = f'http://127.0.0.1:7777?url={quote(url)}&thread={self.thread}'
         return downloadUrl
@@ -513,172 +390,57 @@ class Spider(Spider):
             sz = round(size / (1024.0), 2)
         return str(sz) + fs
 
-# 以下为BiliBiliVd所需函数
-    def proxyMpd(self, params):
-        content, durlinfos, mediaType = self.getDash(params)
-        if mediaType == 'mpd':
-            return [200, "application/dash+xml", content]
-        else:
-            url = ''
-            urlList = [content] + durlinfos['durl'][0]['backup_url'] if 'backup_url' in durlinfos['durl'][0] and durlinfos['durl'][0]['backup_url'] else [content]
-            for url in urlList:
-                if 'mcdn.bilivideo.cn' not in url:
-                    break
-            header = self.b.headers.copy()
-            if 'range' in params:
-                header['Range'] = params['range']
-            if '127.0.0.1:7777' in url:
-                header["Location"] = url
-                return [302, "video/MP2T", None, header]
-            r = requests.get(url, headers=header, stream=True)
-            return [206, "application/octet-stream", r.content]
 
-    def proxyMedia(self, params, forceRefresh=False):
-        _, dashinfos, _ = self.getDash(params)
-        if 'videoid' in params:
-            videoid = int(params['videoid'])
-            dashinfo = dashinfos['video'][videoid]
-        elif 'audioid' in params:
-            audioid = int(params['audioid'])
-            dashinfo = dashinfos['audio'][audioid]
-        else:
-            return [404, "text/plain", ""]
-        url = ''
-        urlList = [dashinfo['baseUrl']] + dashinfo['backupUrl'] if 'backupUrl' in dashinfo and dashinfo['backupUrl'] else [dashinfo['baseUrl']]
-        for url in urlList:
-            if 'mcdn.bilivideo.cn' not in url:
+    # 定义匹配优先级函数
+    def match_score(self, video_stem, sub_name):
+        # 完全匹配（无额外后缀）
+        if sub_name == video_stem:
+            return (0, 0)  # 最高优先级
+        # 尝试匹配 "视频名.语言" 模式
+        pattern = rf"^{re.escape(video_stem)}\.([a-zA-Z\-]*)$"
+        match = re.match(pattern, sub_name)
+        if match:
+            lang = match.group(1).lower()
+            # 中文优先于英文，其他靠后
+            if 'zh' in lang or 'chi' in lang:
+                return (1, 0)
+            elif 'en' in lang or 'eng' in lang:
+                return (1, 1)
+            else:
+                return (1, 2)
+        # 其他情况（如包含额外字符）不匹配
+        return (9, 9)
+    
+    
+    def getAllFile(self, tid):
+        pgs = 1
+        vodList = []
+        while True:
+            r = self.s.get(f'https://drive-pc.quark.cn/1/clouddrive/file/sort?pr=ucpro&fr=pc&uc_param_str=&pdir_fid={tid}&_page={pgs}&_size=100&_fetch_total=1&_fetch_sub_dirs=0&_sort=file_type:asc,file_name:asc', headers={'Referer': 'https://pan.quark.cn/', 'Host': 'drive-pc.quark.cn', 'Connection': 'Keep-Alive'},timeout=10)
+            data = r.json()
+            # self.log(str(data))
+            time.sleep(0.05)
+            vodList += data["data"]['list']
+            pgs += 1
+            if pgs > -1 * (-data['metadata']['_total'] // 100):
                 break
-        if url == "":
-            return [404, "text/plain", ""]
-        header = self.b.headers.copy()
-        if 'range' in params:
-            header['Range'] = params['range']
-        r = requests.get(url, headers=header, stream=True)
-        return [206, "application/octet-stream", r.content]
-
-    def getDash(self, params, forceRefresh=False):
-        aid = params['aid']
-        cid = params['cid']
-        url = unquote(params['url'])
-        key = f'bilivdmpdcache_{aid}_{cid}'
-        if forceRefresh:
-            self.delCache(key)
-        else:
-            data = self.getCache(key)
-            if data:
-                return data['content'], data['dashinfos'], data['type']
-        r = self.b.get(url,timeout=5)
-        data = json.loads(self.cleanText(r.text))
-        if data['code'] != 0:
-            return '', {}, ''
-        if not 'dash' in data['data']:
-            purl = data['data']['durl'][0]['url']
+        self.log("共循环次数："+str(pgs-1))
+        subtList = []
+        videoList = []
+        folderList = []
+        for vod in vodList:
             try:
-                expiresAt = int(re.search(r'deadline=(\d+)', purl).group(1)) - 60
+                if vod['big_thumbnail'].startswith('http'):
+                    imgUrl = vod['big_thumbnail']
+                    img = f'{self.getProxyUrl()}&type=image&url={quote(imgUrl)}'
             except:
-                expiresAt = int(time.time()) + 600
-            if int(self.thread) > 0:
-                purl = f'http://127.0.0.1:7777?url={quote(purl)}&thread={self.thread}'
-            self.setCache(key, {'content': purl, 'type': 'mp4', 'dashinfos':  data['data'], 'expiresAt': expiresAt})
-            return purl,  data['data'], 'mp4'
-        cookiesDict, _, _ = self.getCookie()
-        cookies = quote(json.dumps(cookiesDict))
-        dashinfos = data['data']['dash']
-        duration = dashinfos['duration']
-        minBufferTime = dashinfos['minBufferTime']
-        videoinfo = ''
-        videoid = 0
-        deadlineList = []
-        for video in dashinfos['video']:
-            try:
-                deadline = int(re.search(r'deadline=(\d+)', video['baseUrl']).group(1))
-            except:
-                deadline = int(time.time()) + 600
-            deadlineList.append(deadline)
-            codecs = video['codecs']
-            bandwidth = video['bandwidth']
-            frameRate = video['frameRate']
-            height = video['height']
-            width = video['width']
-            void = video['id']
-            vidparams = params.copy()
-            vidparams['videoid'] = videoid
-            baseUrl = f'http://127.0.0.1:9978/proxy?do=py&type=media&cookies={quote(json.dumps(cookies))}&url={quote(url)}&aid={aid}&cid={cid}&videoid={videoid}'
-            videoinfo = videoinfo + f"""          <Representation bandwidth="{bandwidth}" codecs="{codecs}" frameRate="{frameRate}" height="{height}" id="{void}" width="{width}">
-            <BaseURL>{baseUrl}</BaseURL>
-            <SegmentBase indexRange="{video['SegmentBase']['indexRange']}">
-            <Initialization range="{video['SegmentBase']['Initialization']}"/>
-            </SegmentBase>
-          </Representation>\n"""
-            videoid += 1
-        audioinfo = ''
-        audioid = 0
-        # audioList = sorted(dashinfos['audio'], key=lambda x: x['bandwidth'], reverse=True)
-        for audio in dashinfos['audio']:
-            try:
-                deadline = int(re.search(r'deadline=(\d+)', audio['baseUrl']).group(1))
-            except:
-                deadline = int(time.time()) + 600
-            deadlineList.append(deadline)
-            bandwidth = audio['bandwidth']
-            codecs = audio['codecs']
-            aoid = audio['id']
-            aidparams = params.copy()
-            aidparams['audioid'] = audioid
-            baseUrl = f'http://127.0.0.1:9978/proxy?do=py&type=media&cookies={quote(json.dumps(cookies))}&url={quote(url)}&aid={aid}&cid={cid}&audioid={audioid}'
-            audioinfo = audioinfo + f"""          <Representation audioSamplingRate="44100" bandwidth="{bandwidth}" codecs="{codecs}" id="{aoid}">
-            <BaseURL>{baseUrl}</BaseURL>
-            <SegmentBase indexRange="{audio['SegmentBase']['indexRange']}">
-            <Initialization range="{audio['SegmentBase']['Initialization']}"/>
-            </SegmentBase>
-          </Representation>\n"""
-            audioid += 1
-        mpd = f"""<?xml version="1.0" encoding="UTF-8"?>
-    <MPD xmlns="urn:mpeg:dash:schema:mpd:2011" profiles="urn:mpeg:dash:profile:isoff-on-demand:2011" type="static" mediaPresentationDuration="PT{duration}S" minBufferTime="PT{minBufferTime}S">
-      <Period>
-        <AdaptationSet mimeType="video/mp4" startWithSAP="1" scanType="progressive" segmentAlignment="true">
-          {videoinfo.strip()}
-        </AdaptationSet>
-        <AdaptationSet mimeType="audio/mp4" startWithSAP="1" segmentAlignment="true" lang="und">
-          {audioinfo.strip()}
-        </AdaptationSet>
-      </Period>
-    </MPD>"""
-        expiresAt = min(deadlineList) - 60
-        self.setCache(key, {'type': 'mpd', 'content': mpd.replace('&', '&amp;'), 'dashinfos': dashinfos, 'expiresAt': expiresAt})
-        return mpd.replace('&', '&amp;'), dashinfos, 'mpd'
-
-    def getCookie(self):
-        cookies = requests.utils.dict_from_cookiejar(self.b.cookies)
-        bblogin = self.getCache('bblogin')
-        if bblogin:
-            imgKey = bblogin['imgKey']
-            subKey = bblogin['subKey']
-            return cookies, imgKey, subKey
-        r = self.b.get("http://api.bilibili.com/x/web-interface/nav",timeout=10)
-        data = json.loads(r.text)
-        code = data["code"]
-        if code == 0:
-            imgKey = data['data']['wbi_img']['img_url'].rsplit('/', 1)[1].split('.')[0]
-            subKey = data['data']['wbi_img']['sub_url'].rsplit('/', 1)[1].split('.')[0]
-            self.setCache('bblogin', {'imgKey': imgKey, 'subKey': subKey, 'expiresAt': int(time.time()) + 1200})
-            return cookies, imgKey, subKey
-        r = self.fetch("https://www.bilibili.com/", headers=self.b.headers, timeout=5)
-        cookies = r.cookies.get_dict()
-        imgKey = ''
-        subKey = ''
-        return cookies, imgKey, subKey
-
-    def getUserid(self):
-        # 获取自己的userid(cookies拥有者)
-        url = 'http://api.bilibili.com/x/space/myinfo'
-        r = self.b.get(url, timeout=5)
-        data = json.loads(self.cleanText(r.text))
-        if data['code'] == 0:
-            return data['data']['mid']
-
-    def removeHtmlTags(self, src):
-        from re import sub, compile
-        clean = compile('<.*?>')
-        return sub(clean, '', src)
-        # ec5221a038f64835a89cc179618f43b0
+                img = self.vodPic
+            if vod['dir']:
+                folderList.append({'fid': vod["fid"], 'pdir_fid':vod["pdir_fid"],'fileName': vod['file_name'], "img": img, "remark": "文件夹"})
+            else:
+                if splitext(vod['file_name'])[1] in ['.mp4', '.mpg', '.mkv', '.ts', '.TS', '.avi', '.flv', '.rmvb','.mp3', '.flac', '.wav', '.wma', '.m4a', '.dff']:
+                    size = self.getSize(vod['size'])
+                    videoList.append({'fid': vod["fid"], 'pdir_fid':vod["pdir_fid"],'fileName': vod['file_name'], "img": img, "remark": size})
+                elif splitext(vod['file_name'])[1] in ['.ass', '.ssa', '.srt']:
+                    subtList.append({'fid': vod["fid"], 'fileName': vod['file_name']})
+        return folderList,videoList,subtList
