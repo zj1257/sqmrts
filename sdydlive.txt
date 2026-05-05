@@ -454,13 +454,13 @@ LY1,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00001104/index.m3u8
 狮子王國,https://newcntv.qcloudcdn.com/asp/hls/850/0303000a/3/default/c2e7e767f3144bed959ef20b8b961fe5/850.m3u8
 
 父母爱看,#genre#
+JJ斗地主,http://129.211.14.102:22222/488743
 JJ斗地主,http://tc-tct.douyucdn2.cn/dyliveflv1a/488743rAHScWyyII_2000.flv?wsAuth=fd695c444eeee99cc6122ed396c805ba&token=cpn-androidmpro-0-488743-df8b1830ef2e6ce156759645768df95bf77749da61fcc901&logo=0&expire=0&did=d010b07dcb997ada9934081c873542f0&origin=tct&vhost=play2
-JJ斗地主,https://yylunbo.ottiptv.cc/douyu/488743
 JJ斗地主,http://tc-tct.douyucdn2.cn/dyliveflv1a/488743rAHScWyyII_2000.flv?wsAuth=af68f33dc536a0fb76a514b2dcce8f6b&token=cpn-androidmpro-0-488743-df8b1830ef2e6ce1e55031a221b1d3b7dfd1c7e0d6d57314&logo=0&expire=0&did=d010b07dcb997ada9934081c873542f0&origin=tct&vhost=play2
-JJ斗地主,https://yylunbo.ottiptv.cc/bilibili/22021983
-JJ斗地主,https://yylunbo.ottiptv.cc/huya/14079954
-宋小宝小品,https://yylunbo.ottiptv.cc/douyu/9817729
-赵本山小品,https://yylunbo.ottiptv.cc/douyu/9817716
-贾玲经典小品,https://yylunbo.ottiptv.cc/douyu/10419541
-父母爱情,https://yylunbo.ottiptv.cc/huya/11602071
-父母爱情,https://yylunbo.ottiptv.cc/yy/1354926650
+JJ斗地主,http://129.211.14.102:22226/22021983
+JJ斗地主,http://129.211.14.102:22224/14079954
+宋小宝小品,http://129.211.14.102:22222/9817729
+赵本山小品,http://129.211.14.102:22222/9817716
+贾玲经典小品,http://129.211.14.102:22222/10419541
+父母爱情,http://129.211.14.102:22224/11602071
+父母爱情,http://129.211.14.102:22223/1354926650
