@@ -1,1 +1,1 @@
-{"showTime":5600000,"txt":".com接口已失效，尽快改为.cc或.net","name":"8J+agOOAkOWkquWkquWkquehrOS6huOAkeWFjei0ueWIhuS6q++8mg==","from":"8J+agOOAkOWkquWkquWkquehrOS6huOAkemYsuWkseiBlA=="}
+{"showTime":5600000,"txt":"原.com接口已失效，改为.cc或.net","name":"8J+agOOAkOWkquWkquWkquehrOS6huOAkeWFjei0ueWIhuS6q++8mg==","from":"8J+agOOAkOWkquWkquWkquehrOS6huOAkemYsuWkseiBlA=="}
